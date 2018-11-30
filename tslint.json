@@ -2,6 +2,8 @@
   "defaultSeverity": "error",
   "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
   "rules": {
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "ordered-imports": false,
+    "jsx-boolean-value": false
   }
 }
