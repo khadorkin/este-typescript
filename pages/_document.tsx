@@ -1,4 +1,9 @@
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, {
+  Head,
+  Main,
+  NextScript,
+  NextDocumentContext,
+} from 'next/document';
 import React from 'react';
 import { AppRegistry } from 'react-native';
 
@@ -12,10 +17,9 @@ const normalizeNextElements = `
 `;
 
 export default class MyDocument extends Document {
-  // @ts-ignore
-  public static async getInitialProps({ renderPage }) {
+  static async getInitialProps({ renderPage }: NextDocumentContext) {
     AppRegistry.registerComponent('Main', () => Main);
-    // @ts-ignore
+    // @ts-ignore getApplication is React Native Web addition for SSR.
     const { getStyleElement } = AppRegistry.getApplication('Main');
     const page = renderPage();
     const styles = [
@@ -28,7 +32,7 @@ export default class MyDocument extends Document {
     return { ...page, styles: React.Children.toArray(styles) };
   }
 
-  public render() {
+  render() {
     return (
       <html style={{ height: '100%' }}>
         <Head>
