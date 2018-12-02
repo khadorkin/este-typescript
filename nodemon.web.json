@@ -1,0 +1,6 @@
+{
+  "watch": ["server/web/**/*.tsx"],
+  "execMap": {
+    "tsx": "ts-node --typeCheck --compilerOptions '{\"module\":\"commonjs\"}'"
+  }
+}

@@ -1,10 +1,14 @@
 {
   "defaultSeverity": "error",
   "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": ["server-production/**/*.*"]
+  },
   "rules": {
     "jsx-no-lambda": false,
     "ordered-imports": false,
     "jsx-boolean-value": false,
-    "member-access": false
+    "member-access": false,
+    "curly": false
   }
 }
