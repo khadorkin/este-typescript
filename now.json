@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "name": "este",
+  "builds": [
+    { "src": "api-production/index.jsx", "use": "@now/node" },
+    { "src": "package.json", "use": "@now/next" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api-production/index.jsx" },
+    { "src": "/(.*)", "dest": "/" }
+  ]
+}

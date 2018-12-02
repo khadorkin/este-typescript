@@ -3,7 +3,7 @@
   "compilerOptions": {
     "noEmit": false,
     "module": "commonjs",
-    "outDir": "server-production/web"
+    "outDir": "api-production"
   },
-  "include": ["server/web/**/*.tsx"]
+  "include": ["api/**/*.tsx"]
 }

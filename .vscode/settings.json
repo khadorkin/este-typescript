@@ -1,6 +1,6 @@
 {
   "files.exclude": {
     ".next": true,
-    "server-production": true
+    "api-production": true
   }
 }
