@@ -1,6 +1,7 @@
 import React from 'react';
 import App, { Container, NextAppContext } from 'next/app';
 import { IntlProvider } from 'react-intl';
+import IntlProviderFix from '../components/IntlProviderFix';
 
 export default class MyApp extends App<{
   initialNow: number;
@@ -20,6 +21,7 @@ export default class MyApp extends App<{
 
   render() {
     const { Component, pageProps, initialNow } = this.props;
+
     return (
       <Container>
         <IntlProvider
@@ -28,7 +30,9 @@ export default class MyApp extends App<{
           // https://github.com/yahoo/react-intl/issues/999#issuecomment-335799491
           textComponent={React.Fragment}
         >
-          <Component {...pageProps} />
+          <IntlProviderFix>
+            <Component {...pageProps} />
+          </IntlProviderFix>
         </IntlProvider>
       </Container>
     );

@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Head from 'next/head';
 import Counter from '../components/Counter';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, defineMessages } from 'react-intl';
+import useIntl from '../hooks/useIntl';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,16 +16,21 @@ const styles = StyleSheet.create({
   },
 });
 
+const messages = defineMessages({
+  title: {
+    defaultMessage: 'Este',
+    id: 'indexPage.title',
+  },
+});
+
 export default function Index() {
+  const intl = useIntl();
+
   return (
     <>
-      <FormattedMessage id="index.title" defaultMessage="Este">
-        {message => (
-          <Head>
-            <title>{message}</title>
-          </Head>
-        )}
-      </FormattedMessage>
+      <Head>
+        <title>{intl.formatMessage(messages.title)}</title>
+      </Head>
       <View style={styles.container}>
         <Text style={styles.text}>
           <FormattedMessage
