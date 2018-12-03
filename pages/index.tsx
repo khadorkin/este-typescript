@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Head from 'next/head';
 import Counter from '../components/Counter';
+import { FormattedMessage } from 'react-intl';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,11 +18,20 @@ const styles = StyleSheet.create({
 export default function Index() {
   return (
     <>
-      <Head>
-        <title>Este</title>
-      </Head>
+      <FormattedMessage id="index.title" defaultMessage="Este">
+        {message => (
+          <Head>
+            <title>{message}</title>
+          </Head>
+        )}
+      </FormattedMessage>
       <View style={styles.container}>
-        <Text style={styles.text}>Welcome to Next.js!</Text>
+        <Text style={styles.text}>
+          <FormattedMessage
+            id="index.welcome"
+            defaultMessage="Welcome to Next.js!"
+          />
+        </Text>
         <Counter />
       </View>
     </>
