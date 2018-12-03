@@ -1,4 +1,5 @@
 import * as React from 'react';
 import { InjectedIntl } from 'react-intl';
 
-export default React.createContext<InjectedIntl>(null);
+// https://basarat.gitbooks.io/typescript/docs/javascript/null-undefined.html
+export default React.createContext<InjectedIntl | undefined>(undefined);

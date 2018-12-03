@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Head from 'next/head';
 import Counter from '../components/Counter';
-import { FormattedMessage, defineMessages } from 'react-intl';
+import { defineMessages } from 'react-intl';
 import useIntl from '../hooks/useIntl';
+import Page from '../components/Page';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,12 +12,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    alignItems: 'center',
-    fontSize: 24,
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    fontSize: 16,
+    lineHeight: 24,
   },
 });
 
 const messages = defineMessages({
+  quote: {
+    defaultMessage:
+      'The curious task of economics is to demonstrate to men how little they really know about what they imagine they can design.',
+    id: 'indexPage.welcome',
+  },
   title: {
     defaultMessage: 'Este',
     id: 'indexPage.title',
@@ -25,21 +33,15 @@ const messages = defineMessages({
 
 export default function Index() {
   const intl = useIntl();
-
   return (
-    <>
+    <Page title={'sd'}>
       <Head>
         <title>{intl.formatMessage(messages.title)}</title>
       </Head>
       <View style={styles.container}>
-        <Text style={styles.text}>
-          <FormattedMessage
-            id="index.welcome"
-            defaultMessage="Welcome to Next.js!"
-          />
-        </Text>
+        <Text style={styles.text}>{intl.formatMessage(messages.quote)}</Text>
         <Counter />
       </View>
-    </>
+    </Page>
   );
 }
