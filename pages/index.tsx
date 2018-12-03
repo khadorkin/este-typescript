@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View } from 'react-native';
-import Head from 'next/head';
 import Counter from '../components/Counter';
 import { defineMessages } from 'react-intl';
 import useIntl from '../hooks/useIntl';
@@ -34,10 +33,7 @@ const messages = defineMessages({
 export default function Index() {
   const intl = useIntl();
   return (
-    <Page title={'sd'}>
-      <Head>
-        <title>{intl.formatMessage(messages.title)}</title>
-      </Head>
+    <Page title={intl.formatMessage(messages.title)}>
       <View style={styles.container}>
         <Text style={styles.text}>{intl.formatMessage(messages.quote)}</Text>
         <Counter />
