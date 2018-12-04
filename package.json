@@ -12,7 +12,7 @@
     "build:api": "tsc --project tsconfig.api.json",
     "build:web": "next build",
     "build": "run-p build:api build:web",
-    "start:api": "NODE_ENV=production node api-production/index.jsx",
+    "start:api": "NODE_ENV=production node api-production/index.js",
     "start:web": "next start",
     "start": "run-p start:api start:web",
     "test:lint": "tslint -p .",
