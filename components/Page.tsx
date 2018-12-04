@@ -1,17 +1,22 @@
-import { FunctionComponent } from 'react';
+import React from 'react';
 import Head from 'next/head';
+
+// const Footer: FunctionComponent = () => {
+//   return 'footer';
+// };
 
 interface IPageProps {
   title: string;
 }
 
-const Page: FunctionComponent<IPageProps> = props => {
+const Page: React.FunctionComponent<IPageProps> = props => {
   return (
     <>
       <Head>
         <title>{props.title}</title>
       </Head>
       {props.children}
+      {/* <Footer /> */}
     </>
   );
 };

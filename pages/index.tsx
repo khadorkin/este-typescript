@@ -1,8 +1,15 @@
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Counter from '../components/Counter';
 import { defineMessages } from 'react-intl';
 import useIntl from '../hooks/useIntl';
 import Page from '../components/Page';
+
+// function useTheme() {
+
+// }
+
+// const color = '#343a40';
 
 const styles = StyleSheet.create({
   container: {
@@ -30,7 +37,7 @@ const messages = defineMessages({
   },
 });
 
-export default function Index() {
+const Index: React.FunctionComponent = () => {
   const intl = useIntl();
   return (
     <Page title={intl.formatMessage(messages.title)}>
@@ -40,4 +47,6 @@ export default function Index() {
       </View>
     </Page>
   );
-}
+};
+
+export default Index;

@@ -1,10 +1,10 @@
+import React from 'react';
 import Document, {
   Head,
   Main,
   NextScript,
   NextDocumentContext,
 } from 'next/document';
-import React from 'react';
 import { AppRegistry } from 'react-native';
 
 // Force Next-generated DOM elements to fill their parent's height
