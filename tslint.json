@@ -10,7 +10,6 @@
     "jsx-boolean-value": false,
     "member-access": false,
     "curly": false,
-    "object-literal-sort-keys": false,
     "no-shadowed-variable": false
   }
 }
