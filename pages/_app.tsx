@@ -2,6 +2,8 @@ import React from 'react';
 import App, { Container, NextAppContext } from 'next/app';
 import { IntlProvider } from 'react-intl';
 import IntlProviderFix from '../components/IntlProviderFix';
+import ThemeContext from '../components/ThemeContext';
+import initialTheme from '../themes/initial';
 
 interface IAppProps {
   initialNow: number;
@@ -23,6 +25,8 @@ export default class MyApp extends App<IAppProps> {
 
   render() {
     const { Component, pageProps, initialNow } = this.props;
+    // TODO: Dark by user preferences.
+    const theme = initialTheme;
 
     return (
       <Container>
@@ -33,7 +37,9 @@ export default class MyApp extends App<IAppProps> {
           textComponent={React.Fragment}
         >
           <IntlProviderFix>
-            <Component {...pageProps} />
+            <ThemeContext.Provider value={theme}>
+              <Component {...pageProps} />
+            </ThemeContext.Provider>
           </IntlProviderFix>
         </IntlProvider>
       </Container>

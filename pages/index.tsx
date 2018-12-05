@@ -1,29 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text } from 'react-native';
 import Counter from '../components/Counter';
 import { defineMessages } from 'react-intl';
 import useIntl from '../hooks/useIntl';
 import Page from '../components/Page';
-
-// function useTheme() {
-
-// }
-
-// const color = '#343a40';
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flexGrow: 1,
-    justifyContent: 'center',
-  },
-  text: {
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    fontSize: 16,
-    lineHeight: 24,
-  },
-});
+import useTheme from '../hooks/useTheme';
 
 const messages = defineMessages({
   quote: {
@@ -39,12 +20,12 @@ const messages = defineMessages({
 
 const Index: React.FunctionComponent = () => {
   const intl = useIntl();
+  const theme = useTheme();
+
   return (
     <Page title={intl.formatMessage(messages.title)}>
-      <View style={styles.container}>
-        <Text style={styles.text}>{intl.formatMessage(messages.quote)}</Text>
-        <Counter />
-      </View>
+      <Text style={theme.text}>{intl.formatMessage(messages.quote)}</Text>
+      <Counter />
     </Page>
   );
 };
