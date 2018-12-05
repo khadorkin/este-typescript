@@ -2,7 +2,7 @@ import React from 'react';
 import App, { Container, NextAppContext } from 'next/app';
 import { IntlProvider } from 'react-intl';
 import IntlProviderFix from '../components/IntlProviderFix';
-import ThemeContext from '../components/ThemeContext';
+import ThemeContext from '../contexts/ThemeContext';
 import initialTheme from '../themes/initial';
 import darkTheme from '../themes/dark';
 

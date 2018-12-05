@@ -1,10 +1,11 @@
 import React from 'react';
-import ThemeContext from '../components/ThemeContext';
+import ThemeContext from '../contexts/ThemeContext';
 import { StyleSheet } from 'react-native';
 
 const useTheme = () => {
   const theme = React.useContext(ThemeContext);
-  if (theme == null) throw Error('useTheme: Please provide ThemeContext.');
+  if (theme == null)
+    throw Error('useTheme: Please provide ThemeContext value.');
   const styleSheet = React.useMemo(
     () => {
       return StyleSheet.create(theme);

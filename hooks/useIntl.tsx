@@ -1,10 +1,10 @@
 import React from 'react';
-import IntlContext from '../components/IntlContext';
+import IntlContext from '../contexts/IntlContext';
 
 const useIntl = () => {
-  const context = React.useContext(IntlContext);
-  if (context == null) throw Error('useIntl: Please provide IntlContext.');
-  return context;
+  const intl = React.useContext(IntlContext);
+  if (intl == null) throw Error('useIntl: Please provide IntlContext value.');
+  return intl;
 };
 
 export default useIntl;

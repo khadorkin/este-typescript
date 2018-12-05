@@ -1,6 +1,6 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
-import IntlContext from './IntlContext';
+import IntlContext from '../contexts/IntlContext';
 
 class IntlProviderFix extends React.Component {
   render() {
