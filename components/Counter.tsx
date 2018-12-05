@@ -1,12 +1,17 @@
 import React from 'react';
+import { Text, Button, View } from 'react-native';
+import useTheme from '../hooks/useTheme';
 
 const Counter: React.FunctionComponent = () => {
   const [count, setCount] = React.useState(0);
+  const theme = useTheme();
   return (
-    <div>
-      <p>You clicked: ${count} times.</p>
-      <button onClick={() => setCount(count + 1)}>Click me</button>
-    </div>
+    <>
+      <Text style={theme.text}>You clicked: ${count} times.</Text>
+      <View style={{ flexDirection: 'row' }}>
+        <Button title="Click me" onPress={() => setCount(count + 1)} />
+      </View>
+    </>
   );
 };
 

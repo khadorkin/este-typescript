@@ -4,12 +4,11 @@ import { IntlProvider } from 'react-intl';
 import IntlProviderFix from '../components/IntlProviderFix';
 import ThemeContext from '../components/ThemeContext';
 import initialTheme from '../themes/initial';
+import darkTheme from '../themes/dark';
 
-interface IAppProps {
+export default class MyApp extends App<{
   initialNow: number;
-}
-
-export default class MyApp extends App<IAppProps> {
+}> {
   static async getInitialProps({ Component, ctx }: NextAppContext) {
     let pageProps = {};
 
@@ -25,8 +24,8 @@ export default class MyApp extends App<IAppProps> {
 
   render() {
     const { Component, pageProps, initialNow } = this.props;
-    // TODO: Dark by user preferences.
-    const theme = initialTheme;
+    const isInitial = false;
+    const theme = isInitial ? initialTheme : darkTheme;
 
     return (
       <Container>
