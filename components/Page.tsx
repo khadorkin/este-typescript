@@ -3,6 +3,11 @@ import Head from 'next/head';
 import useTheme from '../hooks/useTheme';
 import { View, StyleSheet, Text } from 'react-native';
 
+const Container: React.FunctionComponent = props => {
+  const theme = useTheme();
+  return <View style={theme.container}>{props.children}</View>;
+};
+
 const Header: React.FunctionComponent = () => {
   const theme = useTheme();
   return (
@@ -10,6 +15,11 @@ const Header: React.FunctionComponent = () => {
       <Text style={theme.text}>header</Text>
     </View>
   );
+};
+
+const Body: React.FunctionComponent = props => {
+  const theme = useTheme();
+  return <View style={theme.body}>{props.children}</View>;
 };
 
 const Footer: React.FunctionComponent = () => {
@@ -38,11 +48,11 @@ const Page: React.FunctionComponent<{
           pageStyle.backgroundColor
         } }`}</style>
       </Head>
-      <View style={theme.container}>
+      <Container>
         <Header />
-        <View style={theme.body}>{props.children}</View>
+        <Body>{props.children}</Body>
         <Footer />
-      </View>
+      </Container>
     </>
   );
 };
