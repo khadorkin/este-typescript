@@ -22,7 +22,7 @@ export const dimensions = {
 
 type Dimensions = typeof dimensions;
 
-export function createTheme(colors: Colors, dimensions: Dimensions) {
+export const createTheme = (colors: Colors, dimensions: Dimensions) => {
   const fontSize = 16;
   const lineHeight = fontSize * 1.5;
 
@@ -59,7 +59,7 @@ export function createTheme(colors: Colors, dimensions: Dimensions) {
     page,
     text,
   };
-}
+};
 
 const theme = createTheme(colors, dimensions);
 
