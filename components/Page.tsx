@@ -25,8 +25,8 @@ const Body: React.FunctionComponent = props => {
 const Footer: React.FunctionComponent = () => {
   const theme = useTheme();
   return (
-    <View>
-      <Text style={theme.text}>footer</Text>
+    <View style={theme.footer}>
+      <Text style={[theme.textSmall]}>made by steida</Text>
     </View>
   );
 };

@@ -11,6 +11,7 @@
 export const colors = {
   background: 'rgb(250, 250, 250)',
   foreground: 'rgb(51, 51, 51)',
+  gray: 'rgb(153, 163, 173)',
   primary: 'red',
 };
 
@@ -53,11 +54,24 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     lineHeight,
   };
 
+  const textSmall = {
+    ...text,
+    fontSize: 12,
+  };
+
+  const footer = {
+    borderTopColor: colors.gray,
+    borderTopWidth: 1,
+    paddingVertical: dimensions.spaceSmall,
+  };
+
   return {
     body,
     container,
+    footer,
     page,
     text,
+    textSmall,
   };
 };
 
