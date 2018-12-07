@@ -22,7 +22,8 @@ const Link: React.FunctionComponent<LinkProps> = props => {
   const [isActive, setIsActive] = React.useState(false);
   const { children, style, activeStyle, ...rest } = props;
 
-  // Workaround, @ts-ignore seems not working when props are used directly.
+  // Workaround, @ts-ignore does not work when props are used directly in tsc
+  // for some reason.
   const reactNativeWebCustomProps = {
     accessibilityRole: 'link',
     onMouseEnter: () => {
