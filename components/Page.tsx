@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import useTheme from '../hooks/useTheme';
 import { View, StyleSheet, Text } from 'react-native';
+import Link from '../components/Link';
 
 const Container: React.FunctionComponent = props => {
   const theme = useTheme();
@@ -26,7 +27,9 @@ const Footer: React.FunctionComponent = () => {
   const theme = useTheme();
   return (
     <View style={theme.footer}>
-      <Text style={[theme.textSmall]}>made by steida</Text>
+      <Text style={theme.footerText}>
+        made by <Link href="https://google.com">steida</Link>
+      </Text>
     </View>
   );
 };
@@ -35,9 +38,12 @@ const Page: React.FunctionComponent<{
   title: string;
 }> = props => {
   const theme = useTheme();
-  const pageStyle = React.useMemo(() => StyleSheet.flatten(theme.page), [
-    theme,
-  ]);
+  const pageStyle = React.useMemo(
+    () => {
+      return StyleSheet.flatten(theme.page);
+    },
+    [theme],
+  );
 
   return (
     <>

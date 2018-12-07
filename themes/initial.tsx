@@ -7,12 +7,14 @@
 //  1) Start with semantic names. Like foreground and background colors.
 //  2) Then add foreground-whatever (e.g. foreground-dark).
 // That's all.
+import { ViewStyle, TextStyle } from 'react-native';
 
+// https://yeun.github.io/open-color/
 export const colors = {
   background: 'rgb(250, 250, 250)',
   foreground: 'rgb(51, 51, 51)',
   gray: 'rgb(153, 163, 173)',
-  primary: 'red',
+  primary: '#228be6',
 };
 
 type Colors = typeof colors;
@@ -27,13 +29,12 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
   const fontSize = 16;
   const lineHeight = fontSize * 1.5;
 
-  // This is actually applied to html and meta theme-color.
-  const page = {
+  const page: TextStyle = {
     backgroundColor: colors.background,
     color: colors.primary,
   };
 
-  const container = {
+  const container: ViewStyle = {
     flex: 1,
     marginHorizontal: 'auto',
     maxWidth: 768,
@@ -42,11 +43,11 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     width: '100%',
   };
 
-  const body = {
+  const body: ViewStyle = {
     flex: 1,
   };
 
-  const text = {
+  const text: TextStyle = {
     color: colors.foreground,
     fontFamily:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
@@ -54,24 +55,34 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     lineHeight,
   };
 
-  const textSmall = {
+  const footerText: TextStyle = {
     ...text,
     fontSize: 12,
   };
 
-  const footer = {
+  const footer: ViewStyle = {
     borderTopColor: colors.gray,
     borderTopWidth: 1,
     paddingVertical: dimensions.spaceSmall,
+  };
+
+  const link: TextStyle = {
+    color: colors.primary,
+  };
+
+  const linkActive: TextStyle = {
+    textDecorationLine: 'underline',
   };
 
   return {
     body,
     container,
     footer,
+    footerText,
+    link,
+    linkActive,
     page,
     text,
-    textSmall,
   };
 };
 
