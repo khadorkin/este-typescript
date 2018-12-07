@@ -22,8 +22,10 @@ const Link: React.FunctionComponent<LinkProps> = props => {
   const [isActive, setIsActive] = React.useState(false);
   const { children, style, activeStyle, ...rest } = props;
 
-  // Workaround, @ts-ignore does not work when props are used directly in tsc
-  // for some reason.
+  // Must be spread because @ts-ignore does not work for some reason.
+  // Btw, VSCode by default does not show an error while tsc does.
+  // To enforce the same VSCode behavior as tsc:
+  // https://github.com/este/este/wiki/Recommended-VSCode-Settings
   const reactNativeWebCustomProps = {
     accessibilityRole: 'link',
     onMouseEnter: () => {
