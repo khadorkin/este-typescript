@@ -11,7 +11,7 @@ import { ViewStyle, TextStyle } from 'react-native';
 
 // https://yeun.github.io/open-color/
 export const colors = {
-  background: 'rgb(250, 250, 250)',
+  background: '#fff',
   foreground: 'rgb(51, 51, 51)',
   gray: 'rgb(153, 163, 173)',
   primary: '#228be6',
@@ -29,9 +29,17 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
   const fontSize = 16;
   const lineHeight = fontSize * 1.5;
 
+  const text: TextStyle = {
+    color: colors.foreground,
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    fontSize,
+    lineHeight,
+  };
+
   const page: TextStyle = {
     backgroundColor: colors.background,
-    color: colors.primary,
+    flex: 1,
   };
 
   const container: ViewStyle = {
@@ -47,23 +55,15 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     flex: 1,
   };
 
-  const text: TextStyle = {
-    color: colors.foreground,
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
-    fontSize,
-    lineHeight,
+  const footer: ViewStyle = {
+    borderTopColor: colors.gray,
+    borderTopWidth: 1,
+    paddingVertical: dimensions.spaceSmall,
   };
 
   const footerText: TextStyle = {
     ...text,
     fontSize: 12,
-  };
-
-  const footer: ViewStyle = {
-    borderTopColor: colors.gray,
-    borderTopWidth: 1,
-    paddingVertical: dimensions.spaceSmall,
   };
 
   const link: TextStyle = {

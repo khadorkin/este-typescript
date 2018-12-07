@@ -1,64 +1,29 @@
 import React from 'react';
 import Head from 'next/head';
 import useTheme from '../hooks/useTheme';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import Link from '../components/Link';
-
-const Container: React.FunctionComponent = props => {
-  const theme = useTheme();
-  return <View style={theme.container}>{props.children}</View>;
-};
-
-const Header: React.FunctionComponent = () => {
-  const theme = useTheme();
-  return (
-    <View>
-      <Text style={theme.text}>header</Text>
-    </View>
-  );
-};
-
-const Body: React.FunctionComponent = props => {
-  const theme = useTheme();
-  return <View style={theme.body}>{props.children}</View>;
-};
-
-const Footer: React.FunctionComponent = () => {
-  const theme = useTheme();
-  return (
-    <View style={theme.footer}>
-      <Text style={theme.footerText}>
-        made by <Link href="https://google.com">steida</Link>
-      </Text>
-    </View>
-  );
-};
 
 const Page: React.FunctionComponent<{
   title: string;
 }> = props => {
   const theme = useTheme();
-  const pageStyle = React.useMemo(
-    () => {
-      return StyleSheet.flatten(theme.page);
-    },
-    [theme],
-  );
-
   return (
     <>
       <Head>
         <title>{props.title}</title>
-        <meta name="theme-color" content={pageStyle.color} />
-        <style>{`html { background-color: ${
-          pageStyle.backgroundColor
-        } }`}</style>
       </Head>
-      <Container>
-        <Header />
-        <Body>{props.children}</Body>
-        <Footer />
-      </Container>
+      <View style={theme.page}>
+        <View style={theme.container}>
+          {/* <View style={theme.header} /> */}
+          <View style={theme.body}>{props.children}</View>
+          <View style={theme.footer}>
+            <Text style={theme.footerText}>
+              made by <Link href="https://twitter.com/steida">steida</Link>
+            </Text>
+          </View>
+        </View>
+      </View>
     </>
   );
 };
