@@ -16,7 +16,8 @@
     "start:web": "next start",
     "start": "run-p start:api start:web",
     "test:lint": "tslint -p .",
-    "test": "run-s test:lint build",
+    "test:tsc": "tsc --project tsconfig.json",
+    "test": "run-s test:lint test:tsc build",
     "deps": "rm -rf package-lock.json node_modules && npm i"
   },
   "dependencies": {
