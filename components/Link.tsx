@@ -2,27 +2,27 @@ import React from 'react';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import useTheme from '../hooks/useTheme';
 import { Text, RegisteredStyle, TextStyle } from 'react-native';
+import { withRouter, WithRouterProps } from 'next/router';
 
 // Handy wrapper for Next.js Link with React Native Web support.
-
-// vsechny cesty tady pres Href, jo, to chci, cajk
 
 type LinkProps = Pick<
   NextLinkProps,
   Exclude<keyof NextLinkProps, 'passHref' | 'children' | 'href'>
-> & {
-  // Allow string etc.
-  children: React.ReactNode;
-  // Make href required.
-  href: NextLinkProps['href'];
-  style?: RegisteredStyle<TextStyle>;
-  activeStyle?: RegisteredStyle<TextStyle>;
-};
+> &
+  WithRouterProps & {
+    // Allow string etc.
+    children: React.ReactNode;
+    // Make href required.
+    href: NextLinkProps['href'];
+    style?: RegisteredStyle<TextStyle>;
+    activeStyle?: RegisteredStyle<TextStyle>;
+  };
 
 const Link: React.FunctionComponent<LinkProps> = props => {
   const theme = useTheme();
   const [isActive, setIsActive] = React.useState(false);
-  const { children, style, activeStyle, ...rest } = props;
+  const { children, style, activeStyle, router, href, ...rest } = props;
 
   // Must be spread because @ts-ignore does not work for some reason.
   // Btw, VSCode by default does not show an error while tsc does.
@@ -38,11 +38,26 @@ const Link: React.FunctionComponent<LinkProps> = props => {
     },
   };
 
+  const routeIsActive = () => {
+    if (router == null) return false;
+    const pathname = typeof href === 'object' ? href.pathname : href;
+    const query = typeof href === 'object' ? href.query : null;
+    return (
+      router.pathname === pathname &&
+      (query == null
+        ? true
+        : JSON.stringify(query) === JSON.stringify(router.query))
+    );
+  };
+
   return (
-    <NextLink {...rest} passHref>
+    <NextLink {...rest} href={href} passHref>
       <Text
         {...reactNativeWebCustomProps}
-        style={[style || theme.link, isActive && theme.linkActive]}
+        style={[
+          style || theme.link,
+          (isActive || routeIsActive()) && (activeStyle || theme.linkActive),
+        ]}
       >
         {children}
       </Text>
@@ -50,4 +65,4 @@ const Link: React.FunctionComponent<LinkProps> = props => {
   );
 };
 
-export default Link;
+export default withRouter(Link);
