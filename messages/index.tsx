@@ -5,10 +5,6 @@ import { defineMessages } from 'react-intl';
 // 2) Messages ids are namespaced, therefore having them at one place helps.
 
 export default defineMessages({
-  authTitle: {
-    defaultMessage: 'Sign In',
-    id: 'authTitle',
-  },
   indexQuote: {
     defaultMessage:
       'The curious task of economics is to demonstrate to men how little they really know about what they imagine they can design.',
@@ -21,5 +17,9 @@ export default defineMessages({
   pageFooterMadeBy: {
     defaultMessage: 'made by',
     id: 'pageFooterMadeBy',
+  },
+  signInTitle: {
+    defaultMessage: 'Sign in',
+    id: 'signInTitle',
   },
 });

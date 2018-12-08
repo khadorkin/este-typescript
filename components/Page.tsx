@@ -17,7 +17,9 @@ const Header: React.FunctionComponent = () => {
           <Link href="/">{intl.formatMessage(messages.indexTitle)}</Link>
         </Text>
         <Text style={theme.text}>
-          <Link href="/signIn">{intl.formatMessage(messages.authTitle)}</Link>
+          <Link href={{ pathname: '/signin' }}>
+            {intl.formatMessage(messages.signInTitle)}
+          </Link>
         </Text>
       </Spacer>
     </View>

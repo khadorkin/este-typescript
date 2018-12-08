@@ -5,15 +5,15 @@ import Page from '../components/Page';
 import useTheme from '../hooks/useTheme';
 import messages from '../messages';
 
-const Auth: React.FunctionComponent = () => {
+const SignIn: React.FunctionComponent = () => {
   const intl = useIntl();
   const theme = useTheme();
 
   return (
-    <Page title={intl.formatMessage(messages.authTitle)}>
-      <Text style={theme.text}>auth</Text>
+    <Page title={intl.formatMessage(messages.signInTitle)}>
+      <Text style={theme.text}>sign in</Text>
     </Page>
   );
 };
 
-export default Auth;
+export default SignIn;

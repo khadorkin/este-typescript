@@ -4,7 +4,15 @@ import useTheme from '../hooks/useTheme';
 import { Text, RegisteredStyle, TextStyle } from 'react-native';
 import { withRouter, WithRouterProps } from 'next/router';
 
-// Handy wrapper for Next.js Link with React Native Web support.
+// Wrapper for Next.js Link with React Native Web support and some other things.
+
+type Href =
+  | '/'
+  | 'https://twitter.com/steida'
+  | {
+      pathname: '/signin';
+      // query?: {| redirectUrl: string |},
+    };
 
 type LinkProps = Pick<
   NextLinkProps,
@@ -13,8 +21,8 @@ type LinkProps = Pick<
   WithRouterProps & {
     // Allow string etc.
     children: React.ReactNode;
-    // Make href required.
-    href: NextLinkProps['href'];
+    // Make href typed and required.
+    href: Href;
     style?: RegisteredStyle<TextStyle>;
     activeStyle?: RegisteredStyle<TextStyle>;
   };
@@ -40,14 +48,14 @@ const Link: React.FunctionComponent<LinkProps> = props => {
 
   const routeIsActive = () => {
     if (router == null) return false;
-    const pathname = typeof href === 'object' ? href.pathname : href;
-    const query = typeof href === 'object' ? href.query : null;
-    return (
-      router.pathname === pathname &&
-      (query == null
-        ? true
-        : JSON.stringify(query) === JSON.stringify(router.query))
-    );
+    // const pathname = typeof href === 'object' ? href.pathname : href;
+    // const query = typeof href === 'object' ? href.query : null;
+    // return (
+    //   router.pathname === pathname &&
+    //   (query == null
+    //     ? true
+    //     : JSON.stringify(query) === JSON.stringify(router.query))
+    // );
   };
 
   return (
