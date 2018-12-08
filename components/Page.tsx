@@ -5,25 +5,33 @@ import { View, Text } from 'react-native';
 import Link from '../components/Link';
 import messages from '../messages';
 import useIntl from '../hooks/useIntl';
+import Spacer from '../components/Spacer';
 
 const Header: React.FunctionComponent = () => {
   const theme = useTheme();
   const intl = useIntl();
   return (
     <View style={theme.header}>
-      <Link href="/">{intl.formatMessage(messages.indexTitle)}</Link>
-      <Link href="/signIn">{intl.formatMessage(messages.authTitle)}</Link>
+      <Spacer>
+        <Text style={theme.text}>
+          <Link href="/">{intl.formatMessage(messages.indexTitle)}</Link>
+        </Text>
+        <Text style={theme.text}>
+          <Link href="/signIn">{intl.formatMessage(messages.authTitle)}</Link>
+        </Text>
+      </Spacer>
     </View>
   );
 };
 
 const Footer: React.FunctionComponent = () => {
   const theme = useTheme();
+  const intl = useIntl();
   return (
     <View style={theme.footer}>
       <Text style={theme.footerText}>
-        {/* // Tohle taky prelozit */}
-        made by <Link href="https://twitter.com/steida">steida</Link>
+        {intl.formatMessage(messages.pageFooterMadeBy)}{' '}
+        <Link href="https://twitter.com/steida">steida</Link>
       </Text>
     </View>
   );

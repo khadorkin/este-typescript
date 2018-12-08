@@ -18,4 +18,8 @@ export default defineMessages({
     defaultMessage: 'Este',
     id: 'indexTitle',
   },
+  pageFooterMadeBy: {
+    defaultMessage: 'made by',
+    id: 'pageFooterMadeBy',
+  },
 });

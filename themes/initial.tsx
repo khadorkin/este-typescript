@@ -20,6 +20,7 @@ export const colors = {
 type Colors = typeof colors;
 
 export const dimensions = {
+  space: 24, // Like default lineHeight
   spaceSmall: 12,
 };
 
@@ -52,9 +53,8 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
   };
 
   const header: ViewStyle = {
-    // borderTopColor: colors.gray,
-    // borderTopWidth: 1,
-    // paddingVertical: dimensions.spaceSmall,
+    flexDirection: 'row',
+    paddingVertical: dimensions.space,
   };
 
   const body: ViewStyle = {
@@ -73,11 +73,18 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
   };
 
   const link: TextStyle = {
+    // Link does not extend text, because link can be in any text and inherits
+    // it's styles like fontFamily and fontSize. Therefore, Link must be always
+    // wrapped by Text.
     color: colors.primary,
   };
 
   const linkActive: TextStyle = {
     textDecorationLine: 'underline',
+  };
+
+  const spacer: ViewStyle = {
+    width: dimensions.spaceSmall,
   };
 
   return {
@@ -89,6 +96,7 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     link,
     linkActive,
     page,
+    spacer,
     text,
   };
 };
