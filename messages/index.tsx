@@ -5,11 +5,6 @@ import { defineMessages } from 'react-intl';
 // 2) Messages ids are namespaced, therefore having them at one place helps.
 
 export default defineMessages({
-  indexQuote: {
-    defaultMessage:
-      'The curious task of economics is to demonstrate to men how little they really know about what they imagine they can design.',
-    id: 'indexQuote',
-  },
   indexTitle: {
     defaultMessage: 'Este',
     id: 'indexTitle',
