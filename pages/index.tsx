@@ -13,7 +13,9 @@ const Index: React.FunctionComponent = () => {
   return (
     <Page title={title}>
       <Text style={theme.heading1}>{title}</Text>
-      <Text style={theme.text}>{intl.formatMessage(messages.indexQuote)}</Text>
+      <Text style={theme.paragraph}>
+        {intl.formatMessage(messages.indexQuote)}
+      </Text>
     </Page>
   );
 };

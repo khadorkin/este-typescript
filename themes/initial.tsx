@@ -75,9 +75,10 @@ const createTypography = ({
 };
 
 export const createTheme = (colors: Colors, dimensions: Dimensions) => {
+  const lineHeight = 24;
   const typography = createTypography({
     fontSize: 16,
-    lineHeight: 24,
+    lineHeight,
     scale: 'step5',
   });
 
@@ -86,6 +87,11 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     fontFamily:
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     ...typography.scale(0),
+  };
+
+  const paragraph: TextStyle = {
+    ...text,
+    marginBottom: lineHeight,
   };
 
   const heading1: TextStyle = {
@@ -98,6 +104,7 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
   const heading2: TextStyle = {
     ...text,
     ...typography.scale(1),
+    marginBottom: lineHeight,
   };
 
   const page: TextStyle = {
@@ -160,6 +167,7 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     link,
     linkActive,
     page,
+    paragraph,
     spacer,
     text,
   };
