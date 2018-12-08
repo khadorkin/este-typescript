@@ -5,6 +5,8 @@ import { Text, RegisteredStyle, TextStyle } from 'react-native';
 
 // Handy wrapper for Next.js Link with React Native Web support.
 
+// vsechny cesty tady pres Href, jo, to chci, cajk
+
 type LinkProps = Pick<
   NextLinkProps,
   Exclude<keyof NextLinkProps, 'passHref' | 'children' | 'href'>

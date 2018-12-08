@@ -51,6 +51,12 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     width: '100%',
   };
 
+  const header: ViewStyle = {
+    // borderTopColor: colors.gray,
+    // borderTopWidth: 1,
+    // paddingVertical: dimensions.spaceSmall,
+  };
+
   const body: ViewStyle = {
     flex: 1,
   };
@@ -79,6 +85,7 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     container,
     footer,
     footerText,
+    header,
     link,
     linkActive,
     page,
