@@ -3,34 +3,63 @@ import useIntl from '../hooks/useIntl';
 import Page, { pageMessages } from '../components/Page';
 import useTheme from '../hooks/useTheme';
 import { Text, TextInput, Platform } from 'react-native';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  emailPlaceholder: {
+    defaultMessage: 'email',
+    id: 'emailPlaceholder',
+  },
+  passwordPlaceholder: {
+    defaultMessage: 'password',
+    id: 'passwordPlaceholder',
+  },
+});
 
 const SignIn: React.FunctionComponent = () => {
   const intl = useIntl();
-  const [email, setEmail] = React.useState('foo');
-  // const [password, setPassword] = useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const theme = useTheme();
   const title = intl.formatMessage(pageMessages.pageTitleSignIn);
-  // Page[Symbol],e
 
   return (
     <Page title={title}>
       <Text style={theme.heading2}>{title}</Text>
       <TextInput
-        editable={false}
+        value={email}
+        onChangeText={setEmail}
+        placeholder={intl.formatMessage(messages.emailPlaceholder)}
+        keyboardType="email-address"
+        // editable
+        // ty errory do vlasti komponenty
+        // error={errors && errors.email}
+        // focusOnError={errors}
+        // onSubmitEditing={() => auth()}
+        style={theme.textInputOutline}
         {...Platform.select({
           web: {
             autoComplete: 'email',
             name: 'email',
           },
         })}
-        // error={errors && errors.email}
+      />
+      {/* <Text style={theme.text}>error</Text> */}
+      <TextInput
+        value={password}
+        onChangeText={setPassword}
+        placeholder={intl.formatMessage(messages.passwordPlaceholder)}
+        secureTextEntry
+        // editable
+        // error={errors && errors.password}
         // focusOnError={errors}
-        keyboardType="email-address"
-        // fok="asd"
-        onChangeText={setEmail}
-        placeholder={'intl.formatMessage(messages.emailPlaceholder)'}
-        value={email}
         // onSubmitEditing={() => auth()}
+        style={theme.textInputOutline}
+        {...Platform.select({
+          web: {
+            name: 'password',
+          },
+        })}
       />
     </Page>
   );
@@ -52,17 +81,6 @@ export default SignIn;
 // import { useAuthMutation } from '../../mutations/AuthMutation';
 // import Router from 'next/router';
 // import { setCookie } from '../../browser/cookie';
-
-// const messages = defineMessages({
-//   emailPlaceholder: {
-//     defaultMessage: 'email',
-//     id: 'auth.emailPlaceholder',
-//   },
-//   passwordPlaceholder: {
-//     defaultMessage: 'password',
-//     id: 'auth.passwordPlaceholder',
-//   },
-// });
 
 // type AuthProps = {|
 //   redirectUrl?: Href,

@@ -14,6 +14,7 @@ export const colors = {
   background: '#fff',
   foreground: 'rgb(51, 51, 51)',
   gray: 'rgb(153, 163, 173)',
+  grayLight: 'rgb(225, 225, 225)',
   primary: '#228be6',
 };
 
@@ -63,6 +64,8 @@ const createTypography = ({
     return lines * lineHeight;
   };
   return {
+    fontSize,
+    lineHeight,
     scale: (level: number) => {
       const modularFontSize = fontSize * ModularScale[scale] ** level;
       const modularLineHeight = computeModularLineHeight(modularFontSize);
@@ -75,10 +78,9 @@ const createTypography = ({
 };
 
 export const createTheme = (colors: Colors, dimensions: Dimensions) => {
-  const lineHeight = 24;
   const typography = createTypography({
     fontSize: 16,
-    lineHeight,
+    lineHeight: 24,
     scale: 'step5',
   });
 
@@ -90,7 +92,7 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
   };
 
   const marginBottom: ViewStyle = {
-    marginBottom: lineHeight,
+    marginBottom: typography.lineHeight,
   };
 
   const paragraph: TextStyle = {
@@ -160,6 +162,21 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     width: dimensions.spaceSmall,
   };
 
+  const textInput: TextStyle = {
+    ...text,
+    ...marginBottom,
+    width: typography.fontSize * 16,
+  };
+
+  const textInputOutline: TextStyle = {
+    ...textInput,
+    borderColor: colors.grayLight,
+    borderRadius: 5,
+    borderWidth: 1,
+    paddingHorizontal: typography.lineHeight / 2,
+    paddingVertical: typography.lineHeight / 3,
+  };
+
   return {
     body,
     container,
@@ -174,6 +191,8 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     paragraph,
     spacer,
     text,
+    textInput,
+    textInputOutline,
   };
 };
 
