@@ -107,8 +107,7 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
   };
 
   const heading2: TextStyle = {
-    ...text,
-    ...marginBottom,
+    ...heading1,
     ...typography.scale(1),
   };
 

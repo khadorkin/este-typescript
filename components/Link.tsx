@@ -1,8 +1,9 @@
 import React from 'react';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import useTheme from '../hooks/useTheme';
-import { Text, RegisteredStyle, TextStyle } from 'react-native';
+import { RegisteredStyle, TextStyle } from 'react-native';
 import { withRouter, WithRouterProps } from 'next/router';
+import Text from './Text';
 
 // Wrapper for Next.js Link with React Native Web support and some other things.
 
@@ -32,20 +33,6 @@ const Link: React.FunctionComponent<LinkProps> = props => {
   const [isActive, setIsActive] = React.useState(false);
   const { children, style, activeStyle, router, href, ...rest } = props;
 
-  // Must be spread because @ts-ignore does not work for some reason.
-  // Btw, VSCode by default does not show an error while tsc does.
-  // To enforce the same VSCode behavior as tsc:
-  // https://github.com/este/este/wiki/Recommended-VSCode-Settings
-  const reactNativeWebCustomProps = {
-    accessibilityRole: 'link',
-    onMouseEnter: () => {
-      setIsActive(true);
-    },
-    onMouseLeave: () => {
-      setIsActive(false);
-    },
-  };
-
   const routeIsActive = () => {
     if (router == null) return false;
     const linkPathname = typeof href === 'object' ? href.pathname : href;
@@ -61,7 +48,9 @@ const Link: React.FunctionComponent<LinkProps> = props => {
   return (
     <NextLink {...rest} href={href} passHref>
       <Text
-        {...reactNativeWebCustomProps}
+        accessibilityRole="link"
+        onMouseEnter={() => setIsActive(true)}
+        onMouseLeave={() => setIsActive(false)}
         style={[
           style || theme.link,
           (isActive || routeIsActive()) && (activeStyle || theme.linkActive),
