@@ -1,8 +1,7 @@
 import React from 'react';
 import useIntl from '../hooks/useIntl';
-import Page from '../components/Page';
+import Page, { pageMessages } from '../components/Page';
 import useTheme from '../hooks/useTheme';
-import messages from '../messages';
 import { Text, TextInput, Platform } from 'react-native';
 
 const SignIn: React.FunctionComponent = () => {
@@ -10,7 +9,8 @@ const SignIn: React.FunctionComponent = () => {
   const [email, setEmail] = React.useState('foo');
   // const [password, setPassword] = useState('');
   const theme = useTheme();
-  const title = intl.formatMessage(messages.signInTitle);
+  const title = intl.formatMessage(pageMessages.pageTitleSignIn);
+  // Page[Symbol],e
 
   return (
     <Page title={title}>

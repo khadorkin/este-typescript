@@ -1,15 +1,14 @@
 import React from 'react';
 import useIntl from '../hooks/useIntl';
-import Page from '../components/Page';
+import Page, { pageMessages } from '../components/Page';
 import useTheme from '../hooks/useTheme';
-import messages from '../messages';
 import Link from '../components/Link';
 import { Text } from 'react-native';
 
 const Index: React.FunctionComponent = () => {
   const theme = useTheme();
   const intl = useIntl();
-  const title = intl.formatMessage(messages.indexTitle);
+  const title = intl.formatMessage(pageMessages.pageTitleIndex);
 
   return (
     <Page title={title}>

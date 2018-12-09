@@ -3,9 +3,24 @@ import Head from 'next/head';
 import useTheme from '../hooks/useTheme';
 import { View, Text } from 'react-native';
 import Link from '../components/Link';
-import messages from '../messages';
 import useIntl from '../hooks/useIntl';
 import Spacer from '../components/Spacer';
+import { defineMessages } from 'react-intl';
+
+export const pageMessages = defineMessages({
+  pageFooterMadeBy: {
+    defaultMessage: 'made by',
+    id: 'pageFooterMadeBy',
+  },
+  pageTitleIndex: {
+    defaultMessage: 'Este',
+    id: 'pageTitleIndex',
+  },
+  pageTitleSignIn: {
+    defaultMessage: 'Sign in',
+    id: 'pageTitleSignIn',
+  },
+});
 
 const Header: React.FunctionComponent = () => {
   const theme = useTheme();
@@ -14,11 +29,13 @@ const Header: React.FunctionComponent = () => {
     <View style={theme.header}>
       <Spacer>
         <Text style={theme.text}>
-          <Link href="/">{intl.formatMessage(messages.indexTitle)}</Link>
+          <Link href="/">
+            {intl.formatMessage(pageMessages.pageTitleIndex)}
+          </Link>
         </Text>
         <Text style={theme.text}>
           <Link href={{ pathname: '/signin' }}>
-            {intl.formatMessage(messages.signInTitle)}
+            {intl.formatMessage(pageMessages.pageTitleSignIn)}
           </Link>
         </Text>
       </Spacer>
@@ -32,7 +49,7 @@ const Footer: React.FunctionComponent = () => {
   return (
     <View style={theme.footer}>
       <Text style={theme.footerText}>
-        {intl.formatMessage(messages.pageFooterMadeBy)}{' '}
+        {intl.formatMessage(pageMessages.pageFooterMadeBy)}{' '}
         <Link href="https://twitter.com/steida">steida</Link>
       </Text>
     </View>
