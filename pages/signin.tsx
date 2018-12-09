@@ -7,6 +7,8 @@ import { Text, TextInput, Platform } from 'react-native';
 
 const SignIn: React.FunctionComponent = () => {
   const intl = useIntl();
+  const [email, setEmail] = React.useState('foo');
+  // const [password, setPassword] = useState('');
   const theme = useTheme();
   const title = intl.formatMessage(messages.signInTitle);
 
@@ -14,19 +16,20 @@ const SignIn: React.FunctionComponent = () => {
     <Page title={title}>
       <Text style={theme.heading2}>{title}</Text>
       <TextInput
-        disabled={false}
+        editable={false}
         {...Platform.select({
           web: {
             autoComplete: 'email',
+            name: 'email',
           },
-        }) as any}
+        })}
         // error={errors && errors.email}
         // focusOnError={errors}
-        // keyboardType="email-address"
-        // name="email"
-        // onChangeText={setEmail}
-        // placeholder={intl.formatMessage(messages.emailPlaceholder)}
-        // value={email}
+        keyboardType="email-address"
+        // fok="asd"
+        onChangeText={setEmail}
+        placeholder={'intl.formatMessage(messages.emailPlaceholder)'}
+        value={email}
         // onSubmitEditing={() => auth()}
       />
     </Page>

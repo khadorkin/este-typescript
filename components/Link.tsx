@@ -58,7 +58,7 @@ const Link: React.FunctionComponent<LinkProps> = props => {
             onMouseEnter: () => setIsActive(true),
             onMouseLeave: () => setIsActive(false),
           },
-        }) as any}
+        })}
       >
         {children}
       </Text>
