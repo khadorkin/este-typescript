@@ -89,13 +89,18 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     ...typography.scale(0),
   };
 
+  const marginBottom: ViewStyle = {
+    marginBottom: lineHeight,
+  };
+
   const paragraph: TextStyle = {
     ...text,
-    marginBottom: lineHeight,
+    ...marginBottom,
   };
 
   const heading1: TextStyle = {
     ...text,
+    ...marginBottom,
     ...typography.scale(2),
     color: colors.gray,
     fontWeight: 'bold',
@@ -103,8 +108,8 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
 
   const heading2: TextStyle = {
     ...text,
+    ...marginBottom,
     ...typography.scale(1),
-    marginBottom: lineHeight,
   };
 
   const page: TextStyle = {
