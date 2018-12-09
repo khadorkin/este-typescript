@@ -7,13 +7,11 @@ import Document, {
 } from 'next/document';
 import { AppRegistry } from 'react-native';
 
-// Force Next-generated DOM elements to fill their parent's height
-const normalizeNextElements = `
-  #__next {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
+// Force Next-generated DOM elements to fill their parent's height.
+// Disable input and textarea outline because blinking caret is enough.
+const globalStyles = `
+  #__next{display: flex; flex-direction: column; height: 100%}
+  input,textarea{outline: none}
 `;
 
 export default class MyDocument extends Document {
@@ -23,10 +21,7 @@ export default class MyDocument extends Document {
     const { getStyleElement } = AppRegistry.getApplication('Main');
     const page = renderPage();
     const styles = [
-      <style
-        dangerouslySetInnerHTML={{ __html: normalizeNextElements }}
-        key="styles"
-      />,
+      <style dangerouslySetInnerHTML={{ __html: globalStyles }} key="styles" />,
       getStyleElement(),
     ];
     return { ...page, styles: React.Children.toArray(styles) };
