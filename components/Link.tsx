@@ -11,7 +11,7 @@ type Href =
   | 'https://twitter.com/steida'
   | {
       pathname: '/signin';
-      // query?: {| redirectUrl: string |},
+      query?: { redirectUrl: string };
     };
 
 type LinkProps = Pick<
