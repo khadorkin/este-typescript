@@ -1,12 +1,11 @@
 import React from 'react';
 import Head from 'next/head';
 import useTheme from '../hooks/useTheme';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import Link from '../components/Link';
 import messages from '../messages';
 import useIntl from '../hooks/useIntl';
 import Spacer from '../components/Spacer';
-import Text from '../components/Text';
 
 const Header: React.FunctionComponent = () => {
   const theme = useTheme();

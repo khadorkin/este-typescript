@@ -4,7 +4,7 @@ import Page from '../components/Page';
 import useTheme from '../hooks/useTheme';
 import messages from '../messages';
 import Link from '../components/Link';
-import Text from '../components/Text';
+import { Text } from 'react-native';
 
 const Index: React.FunctionComponent = () => {
   const theme = useTheme();

@@ -1,9 +1,9 @@
 import React from 'react';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import useTheme from '../hooks/useTheme';
-import { RegisteredStyle, TextStyle } from 'react-native';
+import { Platform, RegisteredStyle, TextStyle } from 'react-native';
 import { withRouter, WithRouterProps } from 'next/router';
-import Text from './Text';
+import { Text } from 'react-native';
 
 // Wrapper for Next.js Link with React Native Web support and some other things.
 
@@ -48,13 +48,17 @@ const Link: React.FunctionComponent<LinkProps> = props => {
   return (
     <NextLink {...rest} href={href} passHref>
       <Text
-        accessibilityRole="link"
-        onMouseEnter={() => setIsActive(true)}
-        onMouseLeave={() => setIsActive(false)}
         style={[
           style || theme.link,
           (isActive || routeIsActive()) && (activeStyle || theme.linkActive),
         ]}
+        {...Platform.select({
+          web: {
+            accessibilityRole: 'link',
+            onMouseEnter: () => setIsActive(true),
+            onMouseLeave: () => setIsActive(false),
+          },
+        }) as any}
       >
         {children}
       </Text>
