@@ -2,8 +2,10 @@ import React from 'react';
 import useIntl from '../hooks/useIntl';
 import Page, { pageMessages } from '../components/Page';
 import useTheme from '../hooks/useTheme';
-import { Text, TextInput, Platform } from 'react-native';
+import { Text, TextInput, Platform, View } from 'react-native';
 import { defineMessages } from 'react-intl';
+import Button from '../components/Button';
+import Spacer from '../components/Spacer';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -13,6 +15,14 @@ const messages = defineMessages({
   passwordPlaceholder: {
     defaultMessage: 'password',
     id: 'passwordPlaceholder',
+  },
+  signIn: {
+    defaultMessage: 'Sign In',
+    id: 'signIn',
+  },
+  signUp: {
+    defaultMessage: 'Sign Up',
+    id: 'signUp',
   },
 });
 
@@ -25,7 +35,7 @@ const SignIn: React.FunctionComponent = () => {
 
   return (
     <Page title={title}>
-      <Text style={theme.heading2}>{title}</Text>
+      <Text style={theme.heading1}>{title}</Text>
       <TextInput
         value={email}
         onChangeText={setEmail}
@@ -61,6 +71,15 @@ const SignIn: React.FunctionComponent = () => {
           },
         })}
       />
+      <View style={theme.row}>
+        <Spacer>
+          <Button type="primary" label={intl.formatMessage(messages.signIn)} />
+          <Button
+            type="secondary"
+            label={intl.formatMessage(messages.signUp)}
+          />
+        </Spacer>
+      </View>
     </Page>
   );
 };

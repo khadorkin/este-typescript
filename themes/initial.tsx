@@ -13,6 +13,7 @@ import { ViewStyle, TextStyle } from 'react-native';
 export const colors = {
   background: '#fff',
   foreground: 'rgb(51, 51, 51)',
+  foregroundInverse: '#fff',
   gray: 'rgb(153, 163, 173)',
   grayLight: 'rgb(225, 225, 225)',
   primary: '#228be6',
@@ -168,17 +169,59 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     width: typography.fontSize * 16,
   };
 
-  const textInputOutline: TextStyle = {
-    ...textInput,
+  const borderGrayLight: ViewStyle = {
     borderColor: colors.grayLight,
     borderRadius: 5,
+    borderStyle: 'solid',
     borderWidth: 1,
+  };
+
+  const textInputOutline: TextStyle = {
+    ...textInput,
+    ...borderGrayLight,
     paddingHorizontal: typography.lineHeight / 2,
     paddingVertical: typography.lineHeight / 3,
   };
 
+  const button: TextStyle = {
+    ...text,
+  };
+
+  const buttonPadding = {
+    paddingHorizontal: typography.lineHeight / 2,
+    paddingVertical: typography.lineHeight / 6,
+  };
+
+  const buttonPrimary: TextStyle = {
+    ...button,
+    ...buttonPadding,
+    ...marginBottom,
+    backgroundColor: colors.primary,
+    borderRadius: 5,
+    color: colors.foregroundInverse,
+  };
+
+  const buttonSecondary: TextStyle = {
+    ...button,
+    ...buttonPadding,
+    ...marginBottom,
+    ...borderGrayLight,
+  };
+
+  const buttonDisabled: TextStyle = {
+    opacity: 0.5,
+  };
+
+  const row: ViewStyle = {
+    flexDirection: 'row',
+  };
+
   return {
     body,
+    button,
+    buttonDisabled,
+    buttonPrimary,
+    buttonSecondary,
     container,
     footer,
     footerText,
@@ -189,6 +232,7 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     linkActive,
     page,
     paragraph,
+    row,
     spacer,
     text,
     textInput,
