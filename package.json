@@ -21,14 +21,17 @@
     "deps": "rm -rf package-lock.json node_modules && npm i"
   },
   "dependencies": {
+    "@types/validator": "^9.4.3",
     "next": "^7.0.2",
     "react": "^16.7.0-alpha.2",
     "react-art": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
     "react-intl": "^2.7.2",
-    "react-native-web": "^0.9.8"
+    "react-native-web": "^0.9.8",
+    "validator": "^10.9.0"
   },
   "devDependencies": {
+    "@divyenduz/ts-graphql-plugin": "^0.1.0",
     "@types/next": "^7.0.5",
     "@types/react": "^16.7.11",
     "@types/react-dom": "^16.0.11",
