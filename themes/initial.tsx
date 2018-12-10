@@ -189,22 +189,25 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
 
   const buttonPadding = {
     paddingHorizontal: typography.lineHeight / 2,
-    paddingVertical: typography.lineHeight / 6,
+    paddingVertical: typography.lineHeight / 8,
+  };
+
+  const borderPrimary = {
+    ...borderGrayLight,
+    borderColor: colors.primary,
   };
 
   const buttonPrimary: TextStyle = {
     ...button,
     ...buttonPadding,
-    ...marginBottom,
+    ...borderPrimary,
     backgroundColor: colors.primary,
-    borderRadius: 5,
     color: colors.foregroundInverse,
   };
 
   const buttonSecondary: TextStyle = {
     ...button,
     ...buttonPadding,
-    ...marginBottom,
     ...borderGrayLight,
   };
 
