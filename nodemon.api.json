@@ -1,6 +1,6 @@
 {
   "watch": ["api/**/*.tsx"],
   "execMap": {
-    "tsx": "ts-node --typeCheck --compilerOptions '{\"module\":\"commonjs\"}'"
+    "tsx": "node -r esm -r ts-node/register"
   }
 }

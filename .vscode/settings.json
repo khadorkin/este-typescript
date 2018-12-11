@@ -1,6 +1,5 @@
 {
   "files.exclude": {
-    ".next": true,
-    "api-production": true
+    ".next": true
   }
 }
