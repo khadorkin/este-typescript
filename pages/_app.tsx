@@ -24,8 +24,8 @@ export default class MyApp extends App<{
 
   render() {
     const { Component, pageProps, initialNow } = this.props;
-    const isInitial = true;
-    const theme = isInitial ? initialTheme : darkTheme;
+    const isInitialTheme = false;
+    const theme = isInitialTheme ? initialTheme : darkTheme;
 
     return (
       <Container>

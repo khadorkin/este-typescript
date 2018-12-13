@@ -6,6 +6,10 @@ import { Text, TextInput, Platform, View } from 'react-native';
 import { defineMessages } from 'react-intl';
 import Button from '../components/Button';
 import Spacer from '../components/Spacer';
+import validateSignIn, { ISignInInput } from '../validators/validateSignIn';
+import FieldErrorMessage, {
+  FieldErrors,
+} from '../components/FieldErrorMessage';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -32,6 +36,14 @@ const SignIn: React.FunctionComponent = () => {
   const [password, setPassword] = React.useState('');
   const theme = useTheme();
   const title = intl.formatMessage(pageMessages.pageTitleSignIn);
+  // TODO: Custom Hook.
+  const [errors, setErrors] = React.useState<FieldErrors<ISignInInput>>({});
+
+  const signIn = (isFirst = false) => {
+    const input = { email, password, isFirst };
+    const errors = validateSignIn(input);
+    setErrors(errors);
+  };
 
   return (
     <Page title={title}>
@@ -41,12 +53,12 @@ const SignIn: React.FunctionComponent = () => {
         onChangeText={setEmail}
         placeholder={intl.formatMessage(messages.emailPlaceholder)}
         keyboardType="email-address"
-        // editable
-        // ty errory do vlasti komponenty
+        // editable={pending}
         // error={errors && errors.email}
         // focusOnError={errors}
-        // onSubmitEditing={() => auth()}
+        onSubmitEditing={() => signIn()}
         style={theme.textInputOutline}
+        blurOnSubmit={false}
         {...Platform.select({
           web: {
             autoComplete: 'email',
@@ -54,6 +66,7 @@ const SignIn: React.FunctionComponent = () => {
           },
         })}
       />
+      <FieldErrorMessage error={errors.email} />
       {/* <Text style={theme.text}>error</Text> */}
       <TextInput
         value={password}
@@ -63,20 +76,27 @@ const SignIn: React.FunctionComponent = () => {
         // editable
         // error={errors && errors.password}
         // focusOnError={errors}
-        // onSubmitEditing={() => auth()}
+        onSubmitEditing={() => signIn()}
         style={theme.textInputOutline}
+        blurOnSubmit={false}
         {...Platform.select({
           web: {
             name: 'password',
           },
         })}
       />
+      <FieldErrorMessage error={errors.password} />
       <View style={theme.row}>
         <Spacer>
-          <Button type="primary" label={intl.formatMessage(messages.signIn)} />
+          <Button
+            type="primary"
+            label={intl.formatMessage(messages.signIn)}
+            onPress={() => signIn()}
+          />
           <Button
             type="secondary"
             label={intl.formatMessage(messages.signUp)}
+            onPress={() => signIn(true)}
           />
         </Spacer>
       </View>
