@@ -1,5 +1,5 @@
 import React from 'react';
-import { FieldError } from '../validators';
+import { FieldError } from '../validations';
 import { FormattedMessage } from 'react-intl';
 
 type MaybeFieldError = FieldError | undefined;

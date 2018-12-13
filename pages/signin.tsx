@@ -6,7 +6,7 @@ import { Text, TextInput, Platform, View } from 'react-native';
 import { defineMessages } from 'react-intl';
 import Button from '../components/Button';
 import Spacer from '../components/Spacer';
-import validateSignIn, { ISignInInput } from '../validators/validateSignIn';
+import validateSignIn, { ISignInInput } from '../validations/validateSignIn';
 import FieldErrorMessage, {
   FieldErrors,
 } from '../components/FieldErrorMessage';
