@@ -4,18 +4,16 @@ import useTheme from '../hooks/useTheme';
 
 type Type = 'text' | 'primary' | 'secondary';
 
-interface IButton extends TouchableOpacityProps {
+interface IButtonProps extends TouchableOpacityProps {
   label: string;
   type?: Type;
 }
 
-const Button: React.FunctionComponent<IButton> = props => {
+const Button: React.FunctionComponent<IButtonProps> = props => {
   const theme = useTheme();
   const { label, disabled, type = 'text', ...rest } = props;
   const getStyle = (type: Type) => {
-    const assertNever = (type: never): never => {
-      throw new Error('Unexpected object: ' + type);
-    };
+    const unknownType = (_: never) => null;
     switch (type) {
       case 'text':
         return theme.button;
@@ -24,7 +22,7 @@ const Button: React.FunctionComponent<IButton> = props => {
       case 'secondary':
         return theme.buttonSecondary;
       default:
-        assertNever(type);
+        return unknownType(type);
     }
   };
 
