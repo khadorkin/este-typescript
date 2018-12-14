@@ -9,7 +9,9 @@ type PasswordError = 'REQUIRED' | 'MIN_5_CHARS' | 'MAX_1024_CHARS';
 // { type: 'FOO', bla: 5 } would be better, but we use GraphQL enum which
 // is represented as string, which allows us to have typed errors across
 // the whole app. This is simple and good enough approach right now.
-export type FieldError = EmailError | PasswordError;
+type ValidationError = EmailError | PasswordError;
+
+export type MaybeValidationError = ValidationError | undefined;
 
 // Helpers.
 
@@ -21,12 +23,12 @@ const max1024 = (value: string) => value.length > 1024 && 'MAX_1024_CHARS';
 
 // Fields.
 
-type Validate<Error> = (value: string) => Error | undefined;
+type Validate = (value: string) => MaybeValidationError;
 
-export const validateEmail: Validate<EmailError> = value =>
+export const validateEmail: Validate = value =>
   required(value) || email(value) || undefined;
 
-export const validatePassword: Validate<PasswordError> = value =>
+export const validatePassword: Validate = value =>
   required(value) || min5(value) || max1024(value) || undefined;
 
 // export const validateUrl = (value: string) =>
