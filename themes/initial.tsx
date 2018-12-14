@@ -12,6 +12,7 @@ import { ViewStyle, TextStyle } from 'react-native';
 // https://yeun.github.io/open-color/
 export const colors = {
   background: '#fff',
+  error: '#fa5252',
   foreground: 'rgb(51, 51, 51)',
   foregroundInverse: '#fff',
   gray: 'rgb(153, 163, 173)',
@@ -165,7 +166,7 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
 
   const textInput: TextStyle = {
     ...text,
-    ...marginBottom,
+    // ...marginBottom,
     width: typography.fontSize * 16,
   };
 
@@ -219,6 +220,13 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     flexDirection: 'row',
   };
 
+  const validationError: TextStyle = {
+    ...text,
+    color: colors.error,
+    minHeight: typography.lineHeight,
+    paddingVertical: typography.lineHeight / 3,
+  };
+
   return {
     body,
     button,
@@ -240,6 +248,7 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     text,
     textInput,
     textInputOutline,
+    validationError,
   };
 };
 
