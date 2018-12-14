@@ -9,6 +9,8 @@ export interface ISignInInput {
   isFirst: boolean;
 }
 
+// TODO: Enforce return type.
+
 const validateSignIn = (input: ISignInInput) => ({
   email: validations.validateEmail(input.email),
   password: validations.validatePassword(input.password),

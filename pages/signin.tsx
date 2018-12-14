@@ -6,10 +6,9 @@ import { Text, TextInput, Platform, View } from 'react-native';
 import { defineMessages } from 'react-intl';
 import Button from '../components/Button';
 import Spacer from '../components/Spacer';
-import validateSignIn, { ISignInInput } from '../validations/validateSignIn';
-import FieldErrorMessage, {
-  FieldErrors,
-} from '../components/FieldErrorMessage';
+import useValidator from '../hooks/useValidator';
+import validateSignIn from '../validations/validateSignIn';
+import ValidationError from '../components/ValidationError';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -32,33 +31,29 @@ const messages = defineMessages({
 
 const SignIn: React.FunctionComponent = () => {
   const intl = useIntl();
+  const title = intl.formatMessage(pageMessages.pageTitleSignIn);
+  const theme = useTheme();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const theme = useTheme();
-  const title = intl.formatMessage(pageMessages.pageTitleSignIn);
-  // TODO: Custom Hook.
-  const [errors, setErrors] = React.useState<FieldErrors<ISignInInput>>({});
+  const [validate, validation] = useValidator(validateSignIn);
 
   const signIn = (isFirst = false) => {
     const input = { email, password, isFirst };
-    const errors = validateSignIn(input);
-    setErrors(errors);
+    validate(input);
   };
 
   return (
     <Page title={title}>
       <Text style={theme.heading1}>{title}</Text>
       <TextInput
+        // editable={mutation.pending}
+        ref={validation.email.ref}
         value={email}
         onChangeText={setEmail}
         placeholder={intl.formatMessage(messages.emailPlaceholder)}
         keyboardType="email-address"
-        // editable={pending}
-        // error={errors && errors.email}
-        // focusOnError={errors}
         onSubmitEditing={() => signIn()}
         style={theme.textInputOutline}
-        blurOnSubmit={false}
         {...Platform.select({
           web: {
             autoComplete: 'email',
@@ -66,26 +61,23 @@ const SignIn: React.FunctionComponent = () => {
           },
         })}
       />
-      <FieldErrorMessage error={errors.email} />
-      {/* <Text style={theme.text}>error</Text> */}
+      <ValidationError error={validation.email.error} />
       <TextInput
+        // editable={mutation.pending}
+        ref={validation.password.ref}
         value={password}
         onChangeText={setPassword}
         placeholder={intl.formatMessage(messages.passwordPlaceholder)}
         secureTextEntry
-        // editable
-        // error={errors && errors.password}
-        // focusOnError={errors}
         onSubmitEditing={() => signIn()}
         style={theme.textInputOutline}
-        blurOnSubmit={false}
         {...Platform.select({
           web: {
             name: 'password',
           },
         })}
       />
-      <FieldErrorMessage error={errors.password} />
+      <ValidationError error={validation.password.error} />
       <View style={theme.row}>
         <Spacer>
           <Button
