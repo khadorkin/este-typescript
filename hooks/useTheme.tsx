@@ -4,8 +4,5 @@ import { StyleSheet } from 'react-native';
 
 export default function useTheme() {
   const theme = React.useContext(ThemeContext);
-  if (theme == null)
-    throw Error('useTheme: Please provide ThemeContext value.');
-  const styleSheet = React.useMemo(() => StyleSheet.create(theme), [theme]);
-  return styleSheet;
+  return React.useMemo(() => StyleSheet.create(theme), [theme]);
 }
