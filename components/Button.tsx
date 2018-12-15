@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, TouchableOpacityProps, Text } from 'react-native';
+import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import useTheme from '../hooks/useTheme';
 
 type Type = 'text' | 'primary' | 'secondary';

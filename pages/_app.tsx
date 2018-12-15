@@ -1,10 +1,10 @@
-import React from 'react';
 import App, { Container, NextAppContext } from 'next/app';
+import React from 'react';
 import { IntlProvider } from 'react-intl';
 import IntlProviderFix from '../components/IntlProviderFix';
 import ThemeContext from '../contexts/ThemeContext';
-import initialTheme from '../themes/initial';
 import darkTheme from '../themes/dark';
+import initialTheme from '../themes/initial';
 
 export default class MyApp extends App<{
   initialNow: number;

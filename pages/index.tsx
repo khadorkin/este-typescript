@@ -1,9 +1,9 @@
 import React from 'react';
-import useIntl from '../hooks/useIntl';
-import Page, { pageMessages } from '../components/Page';
-import useTheme from '../hooks/useTheme';
-import Link from '../components/Link';
 import { Text } from 'react-native';
+import Link from '../components/Link';
+import Page, { pageMessages } from '../components/Page';
+import useIntl from '../hooks/useIntl';
+import useTheme from '../hooks/useTheme';
 
 const Index: React.FunctionComponent = () => {
   const theme = useTheme();

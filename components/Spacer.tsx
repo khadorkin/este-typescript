@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, View, ViewStyle } from 'react-native';
 import useTheme from '../hooks/useTheme';
 
 // Put some space between those components for God's sake!

@@ -1,4 +1,4 @@
-import { colors, dimensions, createTheme } from './initial';
+import { colors, createTheme, dimensions } from './initial';
 
 const darkColors = {
   ...colors,

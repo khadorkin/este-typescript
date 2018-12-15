@@ -7,7 +7,7 @@
 //  1) Start with semantic names. Like foreground and background colors.
 //  2) Then add foreground-whatever (e.g. foreground-dark).
 // That's all.
-import { ViewStyle, TextStyle } from 'react-native';
+import { TextStyle, ViewStyle } from 'react-native';
 
 // https://yeun.github.io/open-color/
 export const colors = {

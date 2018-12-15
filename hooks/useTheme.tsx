@@ -1,6 +1,6 @@
 import React from 'react';
-import ThemeContext from '../contexts/ThemeContext';
 import { StyleSheet } from 'react-native';
+import ThemeContext from '../contexts/ThemeContext';
 
 export default function useTheme() {
   const theme = React.useContext(ThemeContext);

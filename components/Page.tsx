@@ -1,11 +1,11 @@
-import React from 'react';
 import Head from 'next/head';
-import useTheme from '../hooks/useTheme';
-import { View, Text } from 'react-native';
-import Link from '../components/Link';
-import useIntl from '../hooks/useIntl';
-import Spacer from '../components/Spacer';
+import React from 'react';
 import { defineMessages } from 'react-intl';
+import { Text, View } from 'react-native';
+import Link from '../components/Link';
+import Spacer from '../components/Spacer';
+import useIntl from '../hooks/useIntl';
+import useTheme from '../hooks/useTheme';
 
 export const pageMessages = defineMessages({
   pageFooterMadeBy: {

@@ -1,9 +1,9 @@
-import React from 'react';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
-import useTheme from '../hooks/useTheme';
-import { Platform, RegisteredStyle, TextStyle } from 'react-native';
 import { withRouter, WithRouterProps } from 'next/router';
+import React from 'react';
+import { Platform, RegisteredStyle, TextStyle } from 'react-native';
 import { Text } from 'react-native';
+import useTheme from '../hooks/useTheme';
 
 // Wrapper for Next.js Link with React Native Web support and some other things.
 
