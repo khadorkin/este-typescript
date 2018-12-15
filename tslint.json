@@ -9,6 +9,11 @@
     "jsx-boolean-value": false,
     "member-access": false,
     "curly": false,
-    "no-shadowed-variable": false
+    "no-shadowed-variable": false,
+    // To prevent thinking about which syntax is better. Arrow is better
+    // because "const Index: React.FunctionComponent = wholeFnIsChecked".
+    // Note "extends {}" workaround for JSX.
+    // const identity = <T extends {}>(arg: T): T => { return arg; }
+    "only-arrow-functions": true
   }
 }

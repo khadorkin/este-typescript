@@ -34,43 +34,32 @@ const SignIn: React.FunctionComponent = () => {
   const intl = useIntl();
   const title = intl.formatMessage(pageMessages.pageTitleSignIn);
   const theme = useTheme();
-  const [] = useMutation({
-    email: '',
-    password: '',
-  });
-
-  // const [fields, validate] = useFields({
-  //   email: '',
-  //   password: ''
-  // }, validateSignIn);
-  // const [mutation, mutate] = useMutation({
-  //   email: '',
-  //   password: ''
-  // }, validateSignIn, VALIDATE_SIGNIN_MUTATION)
-  // mutation.email.field.value
-  // mutation.email.field.onChangeText
-  // mutation.email.field.ref
-  // mutation.email.field.editable
-  // mutation.email.error
-
-  // const [email, setEmail] = React.useState('');
-  // const [password, setPassword] = React.useState('');
-  // // neni lepsi mit useFields? a pak useMutation?
-  // // jako, budu mit fields bez mutation?
-  // const [validate, errors] = useValidator(validateSignIn);
+  const [mutation /*, commit */] = useMutation(
+    {
+      createAccount: false,
+      email: '',
+      password: '',
+    } /* , validateSignIn */,
+  );
 
   const signIn = (createAccount = false) => {
     // tslint:disable-next-line:no-console
     console.log(createAccount);
-    // const input = { email, password, createAccount };
-    // mutate(input);
+    // use case je, ze chci nastavit neco, a pak commit
+    // mutation.createAccount.set(true)
+    // commit();
   };
+
+  // tslint:disable-next-line:no-console
+  // console.log(JSON.stringify(mutation));
+
+  // mutation.email.textInput
 
   return (
     <Page title={title}>
       <Text style={theme.heading1}>{title}</Text>
       <TextInput
-        // {...mutation.email.textInput}
+        {...mutation.email.textInput}
         // editable={mutation.pending}
         // {...mutation.email.field}
         // ref={refs.email}
@@ -90,6 +79,7 @@ const SignIn: React.FunctionComponent = () => {
       {/* <ValidationError error={mutation.email.error} /> */}
       {/* <ValidationError error={errors.email} /> */}
       <TextInput
+        {...mutation.password.textInput}
         // editable={mutation.pending}
         // ref={validation.password.ref}
         // value={password}
