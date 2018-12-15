@@ -13,6 +13,12 @@ type ValidationError = EmailError | PasswordError;
 
 export type MaybeValidationError = ValidationError | undefined;
 
+export type ValidationErrors<Input> = {
+  [P in keyof Input]?: MaybeValidationError
+};
+// TODO: Use generated Errors.
+export type Validator<Input> = (input: Input) => ValidationErrors<Input>;
+
 // Helpers.
 
 const required = (value: string) => value.length === 0 && 'REQUIRED';
