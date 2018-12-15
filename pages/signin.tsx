@@ -34,64 +34,46 @@ const SignIn: React.FunctionComponent = () => {
   const intl = useIntl();
   const title = intl.formatMessage(pageMessages.pageTitleSignIn);
   const theme = useTheme();
-  const [mutation /*, commit */] = useMutation(
+  const [mutation, commit] = useMutation(
     {
       createAccount: false,
       email: '',
       password: '',
-    } /* , validateSignIn */,
+    } /* ,mutation, validator: validateSignIn, */,
   );
 
   const signIn = (createAccount = false) => {
     // tslint:disable-next-line:no-console
     console.log(createAccount);
     // use case je, ze chci nastavit neco, a pak commit
-    // mutation.createAccount.set(true)
-    // commit();
+    commit();
   };
-
-  // tslint:disable-next-line:no-console
-  // console.log(JSON.stringify(mutation));
-
-  // mutation.email.textInput
 
   return (
     <Page title={title}>
       <Text style={theme.heading1}>{title}</Text>
       <TextInput
         {...mutation.email.textInput}
-        // editable={mutation.pending}
-        // {...mutation.email.field}
-        // ref={refs.email}
-        // value={email}
-        // onChangeText={setEmail}
         placeholder={intl.formatMessage(messages.emailPlaceholder)}
         keyboardType="email-address"
         onSubmitEditing={() => signIn()}
         style={theme.textInputOutline}
+        blurOnSubmit={false}
         {...Platform.select({
-          web: {
-            autoComplete: 'email',
-            name: 'email',
-          },
+          web: { autoComplete: 'email', name: 'email' },
         })}
       />
       {/* <ValidationError error={mutation.email.error} /> */}
       {/* <ValidationError error={errors.email} /> */}
       <TextInput
         {...mutation.password.textInput}
-        // editable={mutation.pending}
-        // ref={validation.password.ref}
-        // value={password}
-        // onChangeText={setPassword}
         placeholder={intl.formatMessage(messages.passwordPlaceholder)}
         secureTextEntry
         onSubmitEditing={() => signIn()}
         style={theme.textInputOutline}
+        blurOnSubmit={false}
         {...Platform.select({
-          web: {
-            name: 'password',
-          },
+          web: { name: 'password' },
         })}
       />
       {/* <ValidationError error={errors.password} /> */}
