@@ -1,12 +1,8 @@
 import React from 'react';
-import { MaybeValidationError } from '../validations';
 import { FormattedMessage } from 'react-intl';
 import { Text } from 'react-native';
 import useTheme from '../hooks/useTheme';
-
-export type ValidationErrors<Input> = {
-  [P in keyof Input]?: MaybeValidationError
-};
+import { MaybeValidationError } from '../validators';
 
 interface IValidationErrorProps {
   error: MaybeValidationError;

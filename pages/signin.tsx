@@ -1,14 +1,15 @@
 import React from 'react';
-import useIntl from '../hooks/useIntl';
-import Page, { pageMessages } from '../components/Page';
-import useTheme from '../hooks/useTheme';
-import { Text, TextInput, Platform, View } from 'react-native';
 import { defineMessages } from 'react-intl';
+import { Platform, Text, TextInput, View } from 'react-native';
 import Button from '../components/Button';
+import Page, { pageMessages } from '../components/Page';
 import Spacer from '../components/Spacer';
-import useValidator from '../hooks/useValidator';
-import validateSignIn from '../validations/validateSignIn';
-import ValidationError from '../components/ValidationError';
+import useIntl from '../hooks/useIntl';
+import useMutation from '../hooks/useMutation';
+import useTheme from '../hooks/useTheme';
+// import useValidator from '../hooks/useValidator';
+// import validateSignIn from '../validators/validateSignIn';
+// import ValidationError from '../components/ValidationError';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -33,23 +34,48 @@ const SignIn: React.FunctionComponent = () => {
   const intl = useIntl();
   const title = intl.formatMessage(pageMessages.pageTitleSignIn);
   const theme = useTheme();
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [validate, validation] = useValidator(validateSignIn);
+  const [] = useMutation({
+    email: '',
+    password: '',
+  });
 
-  const signIn = (isFirst = false) => {
-    const input = { email, password, isFirst };
-    validate(input);
+  // const [fields, validate] = useFields({
+  //   email: '',
+  //   password: ''
+  // }, validateSignIn);
+  // const [mutation, mutate] = useMutation({
+  //   email: '',
+  //   password: ''
+  // }, validateSignIn, VALIDATE_SIGNIN_MUTATION)
+  // mutation.email.field.value
+  // mutation.email.field.onChangeText
+  // mutation.email.field.ref
+  // mutation.email.field.editable
+  // mutation.email.error
+
+  // const [email, setEmail] = React.useState('');
+  // const [password, setPassword] = React.useState('');
+  // // neni lepsi mit useFields? a pak useMutation?
+  // // jako, budu mit fields bez mutation?
+  // const [validate, errors] = useValidator(validateSignIn);
+
+  const signIn = (createAccount = false) => {
+    // tslint:disable-next-line:no-console
+    console.log(createAccount);
+    // const input = { email, password, createAccount };
+    // mutate(input);
   };
 
   return (
     <Page title={title}>
       <Text style={theme.heading1}>{title}</Text>
       <TextInput
+        // {...mutation.email.textInput}
         // editable={mutation.pending}
-        ref={validation.email.ref}
-        value={email}
-        onChangeText={setEmail}
+        // {...mutation.email.field}
+        // ref={refs.email}
+        // value={email}
+        // onChangeText={setEmail}
         placeholder={intl.formatMessage(messages.emailPlaceholder)}
         keyboardType="email-address"
         onSubmitEditing={() => signIn()}
@@ -61,12 +87,13 @@ const SignIn: React.FunctionComponent = () => {
           },
         })}
       />
-      <ValidationError error={validation.email.error} />
+      {/* <ValidationError error={mutation.email.error} /> */}
+      {/* <ValidationError error={errors.email} /> */}
       <TextInput
         // editable={mutation.pending}
-        ref={validation.password.ref}
-        value={password}
-        onChangeText={setPassword}
+        // ref={validation.password.ref}
+        // value={password}
+        // onChangeText={setPassword}
         placeholder={intl.formatMessage(messages.passwordPlaceholder)}
         secureTextEntry
         onSubmitEditing={() => signIn()}
@@ -77,7 +104,7 @@ const SignIn: React.FunctionComponent = () => {
           },
         })}
       />
-      <ValidationError error={validation.password.error} />
+      {/* <ValidationError error={errors.password} /> */}
       <View style={theme.row}>
         <Spacer>
           <Button
