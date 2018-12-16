@@ -61,11 +61,6 @@ const useMutation = <Input extends any>(
     focusablesRef.current[key] = focusable;
   };
 
-  const createError = (key: string) =>
-    firstFieldError && firstFieldError[0] === key
-      ? firstFieldError[1]
-      : undefined;
-
   const createTextInput = (key: string): ITextInput => ({
     // blurOnSubmit true breaks focus on error on invalid field.
     blurOnSubmit: false,
@@ -103,7 +98,10 @@ const useMutation = <Input extends any>(
           return {
             ...mutation,
             [key]: {
-              error: createError(key),
+              error:
+                firstFieldError && firstFieldError[0] === key
+                  ? firstFieldError[1]
+                  : undefined,
               picker: createPicker(key),
               switch: createSwitch(key),
               textInput: createTextInput(key),
