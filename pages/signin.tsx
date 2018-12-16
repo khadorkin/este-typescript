@@ -4,12 +4,11 @@ import { Platform, Text, TextInput, View } from 'react-native';
 import Button from '../components/Button';
 import Page, { pageMessages } from '../components/Page';
 import Spacer from '../components/Spacer';
+import ValidationError from '../components/ValidationError';
 import useIntl from '../hooks/useIntl';
 import useMutation from '../hooks/useMutation';
 import useTheme from '../hooks/useTheme';
-// import useValidator from '../hooks/useValidator';
-// import validateSignIn from '../validators/validateSignIn';
-// import ValidationError from '../components/ValidationError';
+import validateSignIn from '../validators/validateSignIn';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -30,23 +29,33 @@ const messages = defineMessages({
   },
 });
 
+// TODO: Use GraphQL endpoint generated type.
+export interface ISignInInput {
+  createAccount: boolean;
+  email: string;
+  password: string;
+}
+
 const SignIn: React.FunctionComponent = () => {
   const intl = useIntl();
   const title = intl.formatMessage(pageMessages.pageTitleSignIn);
   const theme = useTheme();
-  const [mutation, commit] = useMutation(
+  const [mutation, commit] = useMutation<ISignInInput>(
     {
       createAccount: false,
       email: '',
       password: '',
-    } /* ,mutation, validator: validateSignIn, */,
+    },
+    {
+      validator: validateSignIn,
+    },
   );
 
   const signIn = (createAccount = false) => {
-    // tslint:disable-next-line:no-console
-    console.log(createAccount);
-    // use case je, ze chci nastavit neco, a pak commit
-    commit();
+    commit(input => ({
+      ...input,
+      createAccount,
+    }));
   };
 
   return (
@@ -58,25 +67,22 @@ const SignIn: React.FunctionComponent = () => {
         keyboardType="email-address"
         onSubmitEditing={() => signIn()}
         style={theme.textInputOutline}
-        blurOnSubmit={false}
         {...Platform.select({
           web: { autoComplete: 'email', name: 'email' },
         })}
       />
-      {/* <ValidationError error={mutation.email.error} /> */}
-      {/* <ValidationError error={errors.email} /> */}
+      <ValidationError error={mutation.email.error} />
       <TextInput
         {...mutation.password.textInput}
         placeholder={intl.formatMessage(messages.passwordPlaceholder)}
         secureTextEntry
         onSubmitEditing={() => signIn()}
         style={theme.textInputOutline}
-        blurOnSubmit={false}
         {...Platform.select({
           web: { name: 'password' },
         })}
       />
-      {/* <ValidationError error={errors.password} /> */}
+      <ValidationError error={mutation.password.error} />
       <View style={theme.row}>
         <Spacer>
           <Button
