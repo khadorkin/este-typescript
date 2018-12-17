@@ -2,7 +2,7 @@
   "defaultSeverity": "error",
   "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
   "linterOptions": {
-    "exclude": ["api-production/**/*.*"]
+    "exclude": ["database/generated/**/*.*"]
   },
   "rules": {
     "jsx-no-lambda": false,
