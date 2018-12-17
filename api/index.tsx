@@ -1,29 +1,81 @@
-import * as http from 'http';
-// Just to test code sharing.
-import * as validators from '../validators';
+// import * as http from 'http';
+// // Just to test code sharing.
+// import * as validators from '../validators';
 
-http
-  .createServer((_, res) => {
-    res.write(validators.validateEmail('Hello World!'));
-    res.end();
-  })
-  .listen(4000);
+// http
+//   .createServer((_, res) => {
+//     res.write(validators.validateEmail('Hello World!'));
+//     res.end();
+//   })
+//   .listen(4000);
 
-// import { prisma } from '../database/generated/prisma-client';
+// import { GraphQLServer } from 'graphql-yoga';
+// import { prisma } from '../prisma/generated/prisma-client';
 
-// // A `main` function so that we can use async/await
-
-// const main = async () => {
-//   // Create a new user called `Alice`
-//   const newUser = await prisma.createUser({ name: 'Alice' });
-//   // tslint:disable-next-line:no-console
-//   console.log(`Created new user: ${newUser.name} (ID: ${newUser.id})`);
-
-//   // Read all users from the database and print them to the console
-//   const allUsers = await prisma.users();
-//   // tslint:disable-next-line:no-console
-//   console.log(allUsers);
+// const Foks = {
+//   Post: {
+//     author(parent, args, context) {
+//       return context.prisma
+//         .post({
+//           id: parent.id,
+//         })
+//         .author();
+//     },
+//   },
+//   User: {
+//     posts(parent, args, context) {
+//       return context.prisma
+//         .user({
+//           id: parent.id,
+//         })
+//         .posts();
+//     },
+//   },
 // };
 
-// // tslint:disable-next-line:no-console
-// main().catch(error => console.error(error));
+// const resolvers = {
+//   Mutation: {
+//     createDraft(parent, args, context) {
+//       return context.prisma.createPost({
+//         title: args.title,
+//         author: {
+//           connect: { id: args.userId },
+//         },
+//       });
+//     },
+//     publish(parent, args, context) {
+//       return context.prisma.updatePost({
+//         where: { id: args.postId },
+//         data: { published: true },
+//       });
+//     },
+//     createUser(parent, args, context) {
+//       return context.prisma.createUser({ name: args.name });
+//     },
+//   },
+//   Query: {
+//     publishedPosts(parent, args, context) {
+//       return context.prisma.posts({ where: { published: true } });
+//     },
+//     post(parent, args, context) {
+//       return context.prisma.post({ id: args.postId });
+//     },
+//     postsByUser(parent, args, context) {
+//       return context.prisma
+//         .user({
+//           id: args.userId,
+//         })
+//         .posts();
+//     },
+//   },
+//   ...Foks,
+// };
+
+// const server = new GraphQLServer({
+//   context: {
+//     prisma,
+//   },
+//   resolvers,
+//   typeDefs: './schema.graphql',
+// });
+// server.start(() => console.log('Server is running on http://localhost:4000'));

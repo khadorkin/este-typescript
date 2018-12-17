@@ -2,7 +2,7 @@
   "defaultSeverity": "error",
   "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
   "linterOptions": {
-    "exclude": ["database/generated/**/*.*"]
+    "exclude": ["prisma/generated/**/*.*"]
   },
   "rules": {
     "jsx-no-lambda": false,
