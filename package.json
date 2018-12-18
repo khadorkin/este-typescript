@@ -9,7 +9,6 @@
     "dev:api": "nodemon --config nodemon.api.json api/index.tsx",
     "dev:web": "next",
     "dev": "run-p dev:api dev:web",
-    "build:api": "rm -rf api-production && tsc --project tsconfig.api.json",
     "build:web": "next build",
     "build": "run-p build:api build:web",
     "start:api": "NODE_ENV=production node -r esm -r ts-node/register/transpile-only api/index.tsx",
