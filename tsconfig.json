@@ -9,8 +9,7 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true,
-    // https://github.com/prisma/graphqlgen/issues/351#issuecomment-448041384
-    "noUnusedParameters": false,
+    "noUnusedParameters": true,
     "removeComments": false,
     "preserveConstEnums": true,
     "sourceMap": true,

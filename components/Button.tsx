@@ -4,12 +4,12 @@ import useTheme from '../hooks/useTheme';
 
 type Type = 'text' | 'primary' | 'secondary';
 
-interface IButtonProps extends TouchableOpacityProps {
+interface ButtonProps extends TouchableOpacityProps {
   label: string;
   type?: Type;
 }
 
-const Button: React.FunctionComponent<IButtonProps> = props => {
+const Button: React.FunctionComponent<ButtonProps> = props => {
   const theme = useTheme();
   const { label, disabled, type = 'text', ...rest } = props;
   const getStyle = (type: Type) => {

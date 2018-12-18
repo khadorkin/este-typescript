@@ -33,7 +33,7 @@ const messages = defineMessages({
 });
 
 // TODO: Use GraphQL endpoint generated type.
-export interface ISignInInput {
+export interface SignInInput {
   createAccount: boolean;
   email: string;
   password: string;
@@ -43,7 +43,7 @@ const SignIn: React.FunctionComponent = () => {
   const intl = useIntl();
   const title = intl.formatMessage(pageMessages.pageTitleSignIn);
   const theme = useTheme();
-  const [mutation, commit] = useMutation<ISignInInput>(
+  const [mutation, commit] = useMutation<SignInInput>(
     {
       createAccount: false,
       email: '',

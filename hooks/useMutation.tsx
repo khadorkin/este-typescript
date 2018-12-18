@@ -1,28 +1,28 @@
 import React from 'react';
 import { MaybeValidationError, Validator } from '../validators';
 
-interface IFocusable {
+interface Focusable {
   focus: () => void;
 }
 
-interface IField {
-  ref: (input: IFocusable | null) => void;
+interface Field {
+  ref: (input: Focusable | null) => void;
 }
 
-interface ITextInput extends IField {
+interface TextInputField extends Field {
   blurOnSubmit: boolean;
   editable: boolean;
   onChangeText: (text: string) => void;
   value: string;
 }
 
-interface ISwitch extends IField {
+interface SwitchField extends Field {
   disabled: boolean;
   onValueChange: (value: boolean) => void;
   value: boolean;
 }
 
-interface IPicker extends IField {
+interface PickerField extends Field {
   enabled: boolean;
   onValueChange: (value: any) => void;
   selectedValue: any;
@@ -31,9 +31,9 @@ interface IPicker extends IField {
 type Mutation<Input> = {
   [K in keyof Input]: {
     error: MaybeValidationError;
-    textInput: ITextInput;
-    switch: ISwitch;
-    picker: IPicker;
+    textInput: TextInputField;
+    switch: SwitchField;
+    picker: PickerField;
   }
 };
 
@@ -55,13 +55,13 @@ const useMutation = <Input extends any>(
   const [firstFieldError, setFirstFieldError] = React.useState<
     FieldError | undefined
   >(undefined);
-  const focusablesRef = React.useRef<{ [key: string]: IFocusable | null }>({});
+  const focusablesRef = React.useRef<{ [key: string]: Focusable | null }>({});
 
-  const createRef = (key: string) => (focusable: IFocusable | null) => {
+  const createRef = (key: string) => (focusable: Focusable | null) => {
     focusablesRef.current[key] = focusable;
   };
 
-  const createTextInput = (key: string): ITextInput => ({
+  const createTextInput = (key: string): TextInputField => ({
     // blurOnSubmit true breaks focus on error on invalid field.
     blurOnSubmit: false,
     editable: true,
@@ -72,7 +72,7 @@ const useMutation = <Input extends any>(
     value: state[key],
   });
 
-  const createSwitch = (key: string): ISwitch => ({
+  const createSwitch = (key: string): SwitchField => ({
     disabled: false,
     onValueChange: (value: boolean) => {
       setState({ ...state, [key]: value });
@@ -81,7 +81,7 @@ const useMutation = <Input extends any>(
     value: state[key],
   });
 
-  const createPicker = (key: string): IPicker => ({
+  const createPicker = (key: string): PickerField => ({
     enabled: true,
     onValueChange: (value: unknown) => {
       setState({ ...state, [key]: value });

@@ -2,11 +2,7 @@
   "defaultSeverity": "error",
   "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
   "linterOptions": {
-    "exclude": [
-      "**/generated/**/*.*",
-      // https://github.com/prisma/graphqlgen/issues/351
-      "api/types.ts"
-    ]
+    "exclude": ["**/generated/**/*.*"]
   },
   "rules": {
     "jsx-no-lambda": false,
@@ -18,6 +14,7 @@
     // because "const Index: React.FunctionComponent = wholeFnIsChecked".
     // Note "extends {}" workaround for JSX.
     // const identity = <T extends {}>(arg: T): T => { return arg; }
-    "only-arrow-functions": true
+    "only-arrow-functions": true,
+    "interface-name": [true, "never-prefix"]
   }
 }

@@ -9,12 +9,12 @@ import useTheme from '../hooks/useTheme';
 const visible = (value: unknown) =>
   !(value == null || typeof value === 'boolean');
 
-interface ISpacerProps {
+interface SpacerProps {
   children?: React.ReactNode;
   style?: StyleProp<ViewStyle>;
 }
 
-const Spacer: React.FunctionComponent = (props: ISpacerProps) => {
+const Spacer: React.FunctionComponent = (props: SpacerProps) => {
   const theme = useTheme();
   const spacedChildren = React.Children.toArray(props.children)
     .filter(visible)

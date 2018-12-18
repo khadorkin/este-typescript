@@ -4,13 +4,13 @@ import { Text } from 'react-native';
 import useTheme from '../hooks/useTheme';
 import { MaybeValidationError } from '../validators';
 
-interface IValidationErrorProps {
+interface ValidationErrorProps {
   error: MaybeValidationError;
 }
 
 // Validation errors are not collocated because they are reused.
 
-const ValidationError: React.FunctionComponent<IValidationErrorProps> = ({
+const ValidationError: React.FunctionComponent<ValidationErrorProps> = ({
   error,
 }) => {
   const theme = useTheme();

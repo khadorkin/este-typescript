@@ -4,12 +4,12 @@ import IntlContext from '../contexts/IntlContext';
 
 // Pass old React context into a new React context so we can have useIntl hook.
 
-interface IIntlProviderFix {
+interface IntlProviderFix {
   intl: any;
   children: React.ReactNode;
 }
 
-const IntlProviderFix: React.FunctionComponent<IIntlProviderFix> = props => {
+const IntlProviderFix: React.FunctionComponent<IntlProviderFix> = props => {
   return (
     <IntlContext.Provider value={props.intl}>
       {props.children}
