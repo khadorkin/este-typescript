@@ -2,7 +2,11 @@
   "defaultSeverity": "error",
   "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
   "linterOptions": {
-    "exclude": ["prisma/generated/**/*.*"]
+    "exclude": [
+      "**/generated/**/*.*",
+      // https://github.com/prisma/graphqlgen/issues/351
+      "api/types.ts"
+    ]
   },
   "rules": {
     "jsx-no-lambda": false,

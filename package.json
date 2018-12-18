@@ -19,12 +19,11 @@
     "test:tsc": "tsc --project tsconfig.json",
     "test": "run-s test:lint test:tsc",
     "deps": "rm -rf package-lock.json node_modules && npm i",
-    "prisma": "cd prisma && prisma",
-    "deploy:db": "npm run prisma deploy",
+    "deploy:db": "cd prisma && prisma deploy",
     "docker:up": "cd prisma && docker-compose up -d && cd ../",
     "docker:down": "cd prisma && docker-compose down && cd ../",
-    "graphqlgen": "graphqlgen",
-    "codegen:api": "graphqlgen"
+    "codegen:api": "cd api && graphqlgen",
+    "codegen": "run-s codegen:api"
   },
   "dependencies": {
     "esm": "^3.0.84",
@@ -42,6 +41,7 @@
   "devDependencies": {
     "@types/graphql": "^14.0.3",
     "@types/next": "^7.0.5",
+    "@types/node": "^10.12.15",
     "@types/react": "^16.7.11",
     "@types/react-dom": "^16.0.11",
     "@types/react-intl": "^2.3.14",

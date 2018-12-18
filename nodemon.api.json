@@ -1,6 +1,6 @@
 {
   "watch": ["api/**/*.tsx"],
   "execMap": {
-    "tsx": "node -r esm -r ts-node/register"
+    "tsx": "node -r esm -r ts-node/register/transpile-only"
   }
 }
