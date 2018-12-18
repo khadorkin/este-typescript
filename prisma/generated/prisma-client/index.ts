@@ -2,9 +2,9 @@
 // Please don't change this file manually but run `prisma generate` to update it.
 // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-import { DocumentNode } from 'graphql';
-import { makePrismaClientClass, BaseClientOptions } from 'prisma-client-lib';
-import { typeDefs } from './prisma-schema';
+import { DocumentNode, GraphQLSchema } from "graphql";
+import { makePrismaClientClass, BaseClientOptions } from "prisma-client-lib";
+import { typeDefs } from "./prisma-schema";
 
 type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
   U[keyof U];
@@ -26,7 +26,7 @@ export interface Prisma {
   $exists: Exists;
   $graphql: <T = any>(
     query: string,
-    variables?: { [key: string]: any },
+    variables?: { [key: string]: any }
   ) => Promise<T>;
 
   /**
@@ -43,7 +43,7 @@ export interface Prisma {
       before?: String;
       first?: Int;
       last?: Int;
-    },
+    }
   ) => FragmentableArray<Post>;
   postsConnection: (
     args?: {
@@ -54,7 +54,7 @@ export interface Prisma {
       before?: String;
       first?: Int;
       last?: Int;
-    },
+    }
   ) => PostConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserPromise;
   users: (
@@ -66,7 +66,7 @@ export interface Prisma {
       before?: String;
       first?: Int;
       last?: Int;
-    },
+    }
   ) => FragmentableArray<User>;
   usersConnection: (
     args?: {
@@ -77,7 +77,7 @@ export interface Prisma {
       before?: String;
       first?: Int;
       last?: Int;
-    },
+    }
   ) => UserConnectionPromise;
   node: (args: { id: ID_Output }) => Node;
 
@@ -87,33 +87,33 @@ export interface Prisma {
 
   createPost: (data: PostCreateInput) => PostPromise;
   updatePost: (
-    args: { data: PostUpdateInput; where: PostWhereUniqueInput },
+    args: { data: PostUpdateInput; where: PostWhereUniqueInput }
   ) => PostPromise;
   updateManyPosts: (
-    args: { data: PostUpdateManyMutationInput; where?: PostWhereInput },
+    args: { data: PostUpdateManyMutationInput; where?: PostWhereInput }
   ) => BatchPayloadPromise;
   upsertPost: (
     args: {
       where: PostWhereUniqueInput;
       create: PostCreateInput;
       update: PostUpdateInput;
-    },
+    }
   ) => PostPromise;
   deletePost: (where: PostWhereUniqueInput) => PostPromise;
   deleteManyPosts: (where?: PostWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (
-    args: { data: UserUpdateInput; where: UserWhereUniqueInput },
+    args: { data: UserUpdateInput; where: UserWhereUniqueInput }
   ) => UserPromise;
   updateManyUsers: (
-    args: { data: UserUpdateManyMutationInput; where?: UserWhereInput },
+    args: { data: UserUpdateManyMutationInput; where?: UserWhereInput }
   ) => BatchPayloadPromise;
   upsertUser: (
     args: {
       where: UserWhereUniqueInput;
       create: UserCreateInput;
       update: UserUpdateInput;
-    },
+    }
   ) => UserPromise;
   deleteUser: (where: UserWhereUniqueInput) => UserPromise;
   deleteManyUsers: (where?: UserWhereInput) => BatchPayloadPromise;
@@ -127,10 +127,10 @@ export interface Prisma {
 
 export interface Subscription {
   post: (
-    where?: PostSubscriptionWhereInput,
+    where?: PostSubscriptionWhereInput
   ) => PostSubscriptionPayloadSubscription;
   user: (
-    where?: UserSubscriptionWhereInput,
+    where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
 }
 
@@ -143,30 +143,30 @@ export interface ClientConstructor<T> {
  */
 
 export type PostOrderByInput =
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'title_ASC'
-  | 'title_DESC'
-  | 'published_ASC'
-  | 'published_DESC'
-  | 'createdAt_ASC'
-  | 'createdAt_DESC'
-  | 'updatedAt_ASC'
-  | 'updatedAt_DESC';
+  | "id_ASC"
+  | "id_DESC"
+  | "title_ASC"
+  | "title_DESC"
+  | "published_ASC"
+  | "published_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type UserOrderByInput =
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'email_ASC'
-  | 'email_DESC'
-  | 'name_ASC'
-  | 'name_DESC'
-  | 'createdAt_ASC'
-  | 'createdAt_DESC'
-  | 'updatedAt_ASC'
-  | 'updatedAt_DESC';
+  | "id_ASC"
+  | "id_DESC"
+  | "email_ASC"
+  | "email_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
-export type MutationType = 'CREATED' | 'UPDATED' | 'DELETED';
+export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
 export interface UserUpdateOneWithoutPostsInput {
   create?: UserCreateWithoutPostsInput;
@@ -507,7 +507,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
       before?: String;
       first?: Int;
       last?: Int;
-    },
+    }
   ) => T;
 }
 
@@ -526,7 +526,7 @@ export interface UserSubscription
       before?: String;
       first?: Int;
       last?: Int;
-    },
+    }
   ) => T;
 }
 
@@ -765,13 +765,13 @@ export type Int = number;
 
 export const models = [
   {
-    name: 'Post',
-    embedded: false,
+    name: "Post",
+    embedded: false
   },
   {
-    name: 'User',
-    embedded: false,
-  },
+    name: "User",
+    embedded: false
+  }
 ];
 
 /**
@@ -781,6 +781,6 @@ export const models = [
 export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
   typeDefs,
   models,
-  endpoint: `http://localhost:4466`,
+  endpoint: `http://localhost:4466`
 });
 export const prisma = new Prisma();

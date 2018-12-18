@@ -1,7 +1,7 @@
 import { validateEmail, validatePassword, Validator } from './';
 
 // TODO: Use GraphQL endpoint generated type.
-export interface ISignInInput {
+export interface SignInInput {
   createAccount: boolean;
   email: string;
   password: string;
@@ -19,7 +19,7 @@ export interface ISignInInput {
 // |};
 
 // Note validateSignIn is pure function to be reusable across platforms.
-const validateSignIn: Validator<ISignInInput> = input => ({
+const validateSignIn: Validator<SignInInput> = input => ({
   email: validateEmail(input.email),
   password: validatePassword(input.password),
 });

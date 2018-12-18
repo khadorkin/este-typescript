@@ -1,7 +1,5 @@
 language: typescript
 
-# https://github.com/prisma/graphqlgen/issues/351
-
 schema: ./schema.graphql
 context: ./types.ts:Context
 models:
