@@ -28,6 +28,7 @@
     "codegen": "run-s codegen:api"
   },
   "dependencies": {
+    "@playlyfe/gql": "^2.6.1",
     "esm": "^3.0.84",
     "graphql": "^14.0.2",
     "graphql-yoga": "^1.16.7",
