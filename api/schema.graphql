@@ -1,25 +1,37 @@
+# https://github.com/prisma/vscode-graphql/issues/94
+# import * from "./errors.graphql"
+
+scalar DateTime
+
 type User {
   id: ID!
-  email: String
-  name: String!
-  posts: [Post!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  email: String!
 }
 
-type Post {
-  id: ID!
-  title: String!
-  published: Boolean!
-  author: User
+# https://medium.com/graphql-mastery/json-as-an-argument-for-graphql-mutations-and-queries-3cd06d252a04
+input SignInInput {
+  email: String!
+  password: String!
+  createAccount: Boolean!
 }
 
-type Query {
-  publishedPosts: [Post!]!
-  post(postId: ID!): Post
-  postsByUser(userId: ID!): [Post!]!
+type SignInErrors {
+  email: EmailError
+  password: PasswordError
+}
+
+type SignInPayload {
+  errors: SignInErrors
+  token: String
+  user: User
 }
 
 type Mutation {
-  createUser(name: String!): User
-  createDraft(title: String!, userId: ID!): Post
-  publish(postId: ID!): Post
+  signIn(input: SignInInput!): SignInPayload
+}
+
+type Query {
+  me: User
 }

@@ -1,14 +1,9 @@
 import { UserResolvers } from '../generated/graphqlgen';
+import { User as UserType } from '../types';
 
 export const User: UserResolvers.Type = {
   ...UserResolvers.defaultResolvers,
-  email: () => {
-    throw new Error('Resolver not implemented');
-  },
-  name: () => {
-    throw new Error('Resolver not implemented');
-  },
-  posts: () => {
-    throw new Error('Resolver not implemented');
-  },
+
+  createdAt: (parent: UserType) => parent.createdAt,
+  updatedAt: (parent: UserType) => parent.createdAt,
 };
