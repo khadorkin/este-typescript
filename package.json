@@ -29,9 +29,11 @@
   },
   "dependencies": {
     "@playlyfe/gql": "^2.6.1",
+    "bcryptjs": "^2.4.3",
     "esm": "^3.0.84",
     "graphql": "^14.0.2",
     "graphql-yoga": "^1.16.7",
+    "jsonwebtoken": "^8.4.0",
     "next": "^7.0.2",
     "prisma-client-lib": "^1.22.2",
     "react": "^16.7.0-alpha.2",
@@ -42,7 +44,9 @@
     "validator": "^10.9.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/graphql": "^14.0.3",
+    "@types/jsonwebtoken": "^8.3.0",
     "@types/next": "^7.0.5",
     "@types/node": "^10.12.15",
     "@types/react": "^16.7.11",
@@ -51,6 +55,7 @@
     "@types/react-native": "^0.55.28",
     "@types/validator": "^9.4.3",
     "@zeit/next-typescript": "^1.1.1",
+    "dotenv": "^6.2.0",
     "graphqlgen": "^0.4.0",
     "next-plugin-transpile-modules": "^1.0.0",
     "nodemon": "^1.18.7",

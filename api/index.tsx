@@ -2,13 +2,10 @@ import { GraphQLServer } from 'graphql-yoga';
 import { Prisma } from '../prisma/generated/prisma-client';
 import { resolvers } from './resolvers';
 
-// TODO: Use dotenv as in Este.
-// {
-//   // endpoint: process.env.PRISMA_ENDPOINT!,
-//   // secret: process.env.PRISMA_SECRET!,
-//   // debug: true,
-// }
-const db = new Prisma();
+const db = new Prisma({
+  endpoint: process.env.PRISMA_ENDPOINT as string,
+  secret: process.env.PRISMA_SECRET,
+});
 
 const server = new GraphQLServer({
   context: { db },

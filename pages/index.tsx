@@ -5,6 +5,13 @@ import Page, { pageMessages } from '../components/Page';
 import useIntl from '../hooks/useIntl';
 import useTheme from '../hooks/useTheme';
 
+// import getConfig from 'next/config';
+// const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+// // tslint:disable-next-line:no-console
+// console.log(serverRuntimeConfig.mySecret); // Will only be available on the server side
+// // tslint:disable-next-line:no-console
+// console.log(publicRuntimeConfig.staticFolder); // Will be available on both server and client
+
 const Index: React.FunctionComponent = () => {
   const theme = useTheme();
   const intl = useIntl();
