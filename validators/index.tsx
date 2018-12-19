@@ -1,14 +1,20 @@
 import isEmail from 'validator/lib/isEmail';
 // import isURL from 'validator/lib/isURL';
 
-// TODO: Use GraphQL endpoint generated types for Error fields.
-type EmailError = 'ALREADY_EXISTS' | 'EMAIL' | 'NOT_EXISTS' | 'REQUIRED';
-type PasswordError = 'REQUIRED' | 'MIN_5_CHARS' | 'MAX_1024_CHARS';
+// Note validation errors are plain strings.
+// That's because we are reusing them in api, check errors.graphql.
+// Sure we could have objects instead of enums, e.g.
+// { type: 'MAX', maxLength: 123 }
+// But that enums are easier for now.
 
-// Note errors are plain strings. Having error objects like
-// { type: 'FOO', bla: 5 } would be better, but we use GraphQL enum which
-// is represented as string, which allows us to have typed errors across
-// the whole app. This is simple and good enough approach right now.
+export type EmailError = 'REQUIRED' | 'EMAIL' | 'ALREADY_EXISTS' | 'NOT_EXISTS';
+
+export type PasswordError =
+  | 'REQUIRED'
+  | 'MIN_5_CHARS'
+  | 'MAX_1024_CHARS'
+  | 'WRONG_PASSWORD';
+
 type ValidationError = EmailError | PasswordError;
 
 export type MaybeValidationError = ValidationError | undefined;

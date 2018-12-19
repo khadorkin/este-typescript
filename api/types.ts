@@ -1,11 +1,5 @@
 import { Prisma } from '../prisma/generated/prisma-client';
-
-type EmailError = 'REQUIRED' | 'EMAIL' | 'ALREADY_EXISTS' | 'NOT_EXISTS';
-type PasswordError =
-  | 'REQUIRED'
-  | 'MIN_5_CHARS'
-  | 'MAX_1024_CHARS'
-  | 'WRONG_PASSWORD';
+import { EmailError, PasswordError } from '../validators';
 
 export interface User {
   id: string;
