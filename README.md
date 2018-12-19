@@ -14,6 +14,7 @@ Is What It Is.
 - `npm install`
 - `npm run docker:up`
 - `npm run deploy:db`
+- `npm run env dev`
 
 ## Dev tasks
 
@@ -22,3 +23,5 @@ Is What It Is.
 - `npm run prisma --help`
 - `npm run prisma reset` wipes the data and keeps the schema
 - `npm run prisma delete` get rid of the whole service
+- `npm run env dev` copy `.env.dev` to `.env`
+- `npm run env production` copy `.env.production` to `.env`

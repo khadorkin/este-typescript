@@ -16,9 +16,9 @@ module.exports = {
     }),
   ),
   serverRuntimeConfig: {
-    // mySecret: process.env.API_SECRET,
+    // mySecret: process.env.SECRET_CONFIG_VALUE,
   },
   publicRuntimeConfig: {
-    // staticFolder: process.env.PRISMA_SECRET,
+    // staticFolder: process.env.PUBLIC_CONFIG_VALUE,
   },
 };
