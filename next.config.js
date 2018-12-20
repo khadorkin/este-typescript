@@ -15,10 +15,10 @@ module.exports = {
       },
     }),
   ),
-  serverRuntimeConfig: {
-    // mySecret: process.env.SECRET_CONFIG_VALUE,
-  },
   publicRuntimeConfig: {
     // staticFolder: process.env.PUBLIC_CONFIG_VALUE,
+  },
+  serverRuntimeConfig: {
+    // mySecret: process.env.SECRET_CONFIG_VALUE,
   },
 };

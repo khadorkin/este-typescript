@@ -65,6 +65,13 @@ const ValidationError: React.FunctionComponent<ValidationErrorProps> = ({
             defaultMessage="Not exists."
           />
         );
+      case 'WRONG_PASSWORD':
+        return (
+          <FormattedMessage
+            id="ValidationError.wrongPassword"
+            defaultMessage="Wrong password."
+          />
+        );
       default:
         return unknownType(error);
     }

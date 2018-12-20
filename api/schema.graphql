@@ -25,7 +25,6 @@ type SignInErrors {
 type SignInPayload {
   errors: SignInErrors
   token: String
-  user: User
 }
 
 type Mutation {

@@ -130,11 +130,10 @@ export namespace MutationResolvers {
 
 export namespace SignInPayloadResolvers {
   export const defaultResolvers = {
-    errors: (parent: SignInPayload) => parent.errors,
+    errors: (parent: SignInPayload) =>
+      parent.errors === undefined ? null : parent.errors,
     token: (parent: SignInPayload) =>
       parent.token === undefined ? null : parent.token,
-    user: (parent: SignInPayload) =>
-      parent.user === undefined ? null : parent.user,
   };
 
   export type ErrorsResolver = (
@@ -151,13 +150,6 @@ export namespace SignInPayloadResolvers {
     info: GraphQLResolveInfo,
   ) => string | null | Promise<string | null>;
 
-  export type UserResolver = (
-    parent: SignInPayload,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => User | null | Promise<User | null>;
-
   export interface Type {
     errors: (
       parent: SignInPayload,
@@ -172,13 +164,6 @@ export namespace SignInPayloadResolvers {
       ctx: Context,
       info: GraphQLResolveInfo,
     ) => string | null | Promise<string | null>;
-
-    user: (
-      parent: SignInPayload,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => User | null | Promise<User | null>;
   }
 }
 
