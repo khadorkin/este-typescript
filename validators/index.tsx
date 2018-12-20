@@ -1,19 +1,6 @@
 import isEmail from 'validator/lib/isEmail';
+import { EmailError, PasswordError } from '../api/types';
 // import isURL from 'validator/lib/isURL';
-
-// Note validation errors are plain strings.
-// That's because we are reusing them in api, check errors.graphql.
-// Sure we could have objects instead of enums, e.g.
-// { type: 'MAX', maxLength: 123 }
-// But that enums are easier for now.
-
-export type EmailError = 'REQUIRED' | 'EMAIL' | 'ALREADY_EXISTS' | 'NOT_EXISTS';
-
-export type PasswordError =
-  | 'REQUIRED'
-  | 'MIN_5_CHARS'
-  | 'MAX_1024_CHARS'
-  | 'WRONG_PASSWORD';
 
 type ValidationError = EmailError | PasswordError;
 

@@ -1,5 +1,12 @@
 import { Prisma } from '../prisma/generated/prisma-client';
-import { EmailError, PasswordError } from '../validators';
+
+export type EmailError = 'REQUIRED' | 'EMAIL' | 'ALREADY_EXISTS' | 'NOT_EXISTS';
+
+export type PasswordError =
+  | 'REQUIRED'
+  | 'MIN_5_CHARS'
+  | 'MAX_1024_CHARS'
+  | 'WRONG_PASSWORD';
 
 export interface User {
   id: string;
@@ -20,9 +27,8 @@ export interface SignInErrors {
 }
 
 export interface SignInPayload {
-  errors: SignInErrors;
+  errors: SignInErrors | null;
   token: string | null;
-  user: User | null;
 }
 
 export interface Context {
