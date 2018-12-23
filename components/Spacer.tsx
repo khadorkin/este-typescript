@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
+import { RegisteredStyle, View, ViewStyle } from 'react-native';
 import useTheme from '../hooks/useTheme';
 
 // Put some space between those components for God's sake!
@@ -11,10 +11,10 @@ const visible = (value: unknown) =>
 
 interface SpacerProps {
   children?: React.ReactNode;
-  style?: StyleProp<ViewStyle>;
+  style?: RegisteredStyle<ViewStyle>;
 }
 
-const Spacer: React.FunctionComponent = (props: SpacerProps) => {
+const Spacer: React.FunctionComponent<SpacerProps> = props => {
   const theme = useTheme();
   const spacedChildren = React.Children.toArray(props.children)
     .filter(visible)
