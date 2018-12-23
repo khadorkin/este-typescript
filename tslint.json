@@ -10,6 +10,7 @@
     "member-access": false,
     "curly": false,
     "no-shadowed-variable": false,
+    "ordered-imports": false,
     // To prevent thinking about which syntax is better. Arrow is better
     // because "const Index: React.FunctionComponent = wholeFnIsChecked".
     // Note "extends {}" workaround for JSX.
