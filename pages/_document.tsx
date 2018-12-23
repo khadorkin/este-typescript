@@ -33,7 +33,14 @@ export default class MyDocument extends Document {
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
-        <body style={{ height: '100%', overflow: 'hidden' }}>
+        <body
+          style={{
+            height: '100%',
+            // overflow hidden disables browser scroll momentum, which is not
+            // supported in ScrollView yet.
+            // overflow: 'hidden',
+          }}
+        >
           <Main />
           <NextScript />
         </body>

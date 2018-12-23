@@ -115,9 +115,11 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
     ...typography.scale(1),
   };
 
-  const page: TextStyle = {
+  const page: ViewStyle = {
     backgroundColor: colors.background,
-    flex: 1,
+    // minHeight ensures the footer is always at the bottom. Flex 1 can't help,
+    // because we do not use ScrollView. Check _document.tsx overflow comment.
+    minHeight: '100%',
   };
 
   const container: ViewStyle = {
