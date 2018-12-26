@@ -3,8 +3,8 @@ import * as jwt from 'jsonwebtoken';
 import { MutationResolvers } from '../generated/graphqlgen';
 import { User } from '../types';
 
-// login: async (_parent, { email, password }, ctx) => {
-//   const user = await ctx.db.user({ email })
+// login: async (_parent, { email, password }, context) => {
+//   const user = await context.db.user({ email })
 //   const valid = await bcrypt.compare(password, user ? user.password : '')
 
 //   if (!valid || !user) {
@@ -22,7 +22,7 @@ import { User } from '../types';
 export const Mutation: MutationResolvers.Type = {
   ...MutationResolvers.defaultResolvers,
 
-  signIn: async (_, { input }, ctx) => {
+  signIn: async (_, { input }, context) => {
     // TODO: Validate
     // const errors = validateAuth(input);
     // if (errors) return { errors };
@@ -42,7 +42,7 @@ export const Mutation: MutationResolvers.Type = {
       //     },
       //   };
       const password = await bcrypt.hash(input.password, 10);
-      const user = await ctx.db.createUser({ email, password });
+      const user = await context.db.createUser({ email, password });
       return createSuccessAuthPayload(user);
     }
     throw new Error('Resolver not implemented');
