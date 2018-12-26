@@ -1,126 +1,127 @@
 import React from 'react';
-import { MaybeValidationError, Validator } from '../validators';
 
 interface Focusable {
   focus: () => void;
 }
 
-interface Field {
+interface FocusableField {
   ref: (input: Focusable | null) => void;
 }
 
-interface TextInputField extends Field {
+interface TextInputField extends FocusableField {
   blurOnSubmit: boolean;
   editable: boolean;
   onChangeText: (text: string) => void;
   value: string;
 }
 
-interface SwitchField extends Field {
+interface SwitchField extends FocusableField {
   disabled: boolean;
   onValueChange: (value: boolean) => void;
   value: boolean;
 }
 
-interface PickerField extends Field {
+interface PickerField extends FocusableField {
   enabled: boolean;
   onValueChange: (value: any) => void;
   selectedValue: any;
 }
 
-type Mutation<Input> = {
-  [K in keyof Input]: {
-    error: MaybeValidationError;
-    textInput: TextInputField;
-    switch: SwitchField;
-    picker: PickerField;
-  }
-};
+type Field<Value> = Value extends boolean
+  ? {
+      switch: SwitchField;
+    }
+  : Value extends string
+  ? {
+      textInput: TextInputField;
+      picker: PickerField;
+    }
+  : never;
 
-// TODO: Make inputMapper optional, add onComplete.
-type Commit<Input> = (inputMapper: (input: Input) => Input) => void;
+type Fields<Input> = { [K in keyof Input]: Field<Input[K]> };
 
-type FieldError = [string, MaybeValidationError];
+type Commit<Input> = (
+  options?: {
+    merge: Partial<Input>;
+  },
+) => void;
+
+// Read it like a story. First, we need fields, then we can commit, etc.
+type Return<Input, Errors> = [Fields<Input>, Commit<Input>, Partial<Errors>];
 
 // 'extends any' because of https://github.com/Microsoft/TypeScript/issues/4922
-// TODO: Ask Marius why extends {} does not work.
-const useMutation = <Input extends any>(
+const useMutation = <Input extends any, Errors extends any>(
   initialState: Input,
-  options?: {
-    validator?: Validator<Input>;
+  useMutationOptions?: {
+    validator?: (input: Input) => Errors;
   },
-): [Mutation<Input>, Commit<Input>] => {
-  // TODO: Consider Apollo local state for types and across pages persistence.
+): Return<Input, Errors> => {
   const [state, setState] = React.useState<Input>(initialState);
-  const [firstFieldError, setFirstFieldError] = React.useState<
-    FieldError | undefined
-  >(undefined);
+  const [errors, setErrors] = React.useState<Partial<Errors>>({});
   const focusablesRef = React.useRef<{ [key: string]: Focusable | null }>({});
 
-  const createRef = (key: string) => (focusable: Focusable | null) => {
-    focusablesRef.current[key] = focusable;
-  };
+  const fields = React.useMemo<Fields<Input>>(
+    () => {
+      const createRef = (key: string) => (focusable: Focusable | null) => {
+        focusablesRef.current[key] = focusable;
+      };
 
-  const createTextInput = (key: string): TextInputField => ({
-    // blurOnSubmit true breaks focus on error on invalid field.
-    blurOnSubmit: false,
-    editable: true,
-    onChangeText: (text: string) => {
-      setState({ ...state, [key]: text });
-    },
-    ref: createRef(key),
-    value: state[key],
-  });
-
-  const createSwitch = (key: string): SwitchField => ({
-    disabled: false,
-    onValueChange: (value: boolean) => {
-      setState({ ...state, [key]: value });
-    },
-    ref: createRef(key),
-    value: state[key],
-  });
-
-  const createPicker = (key: string): PickerField => ({
-    enabled: true,
-    onValueChange: (value: unknown) => {
-      setState({ ...state, [key]: value });
-    },
-    ref: createRef(key),
-    selectedValue: state[key],
-  });
-
-  const mutation = React.useMemo<Mutation<Input>>(
-    () =>
-      Object.keys(initialState).reduce(
-        (mutation, key) => {
-          // TODO: How to type this intermediate object?
-          return {
-            ...mutation,
-            [key]: {
-              error:
-                firstFieldError && firstFieldError[0] === key
-                  ? firstFieldError[1]
-                  : undefined,
-              picker: createPicker(key),
-              switch: createSwitch(key),
-              textInput: createTextInput(key),
-            },
-          };
+      const createTextInput = (key: string): TextInputField => ({
+        // blurOnSubmit true breaks focus on error on invalid field.
+        blurOnSubmit: false,
+        editable: true,
+        onChangeText: (text: string) => {
+          setState({ ...state, [key]: text });
         },
-        {} as Mutation<Input>,
-      ),
-    [state, firstFieldError],
+        ref: createRef(key),
+        value: state[key],
+      });
+
+      const createSwitch = (key: string): SwitchField => ({
+        disabled: false,
+        onValueChange: (value: boolean) => {
+          setState({ ...state, [key]: value });
+        },
+        ref: createRef(key),
+        value: state[key],
+      });
+
+      const createPicker = (key: string): PickerField => ({
+        enabled: true,
+        onValueChange: (value: string) => {
+          setState({ ...state, [key]: value });
+        },
+        ref: createRef(key),
+        selectedValue: state[key],
+      });
+
+      // TODO: How to type field and return values properly?
+      return Object.keys(state).reduce((fields, key) => {
+        const value = state[key];
+        const field =
+          typeof value === 'boolean'
+            ? { switch: createSwitch(key) }
+            : {
+                picker: createPicker(key),
+                textInput: createTextInput(key),
+              };
+        return { ...fields, [key]: field };
+      }, {}) as Fields<Input>;
+    },
+    [state],
   );
 
-  const commit: Commit<Input> = inputMapper => {
-    const input = inputMapper(state);
-    if (options && options.validator) {
-      const errors = options.validator(input);
-      // Get first error defined by the object keys in order to have one by one
-      // validation. Sure we can show all errors, but that's noisy.
+  const commit: Commit<Input> = commitOptions => {
+    const input = {
+      ...state,
+      ...(commitOptions && commitOptions.merge),
+    };
+
+    if (useMutationOptions && useMutationOptions.validator) {
+      const errors = useMutationOptions.validator(input);
       const error = Object.entries(errors).find(([_, value]) => value != null);
-      setFirstFieldError(error);
+      // as Errors is workaround, TypeScript should infer it.
+      setErrors(error ? ({ [error[0]]: error[1] } as Errors) : {});
       if (error) {
         const field = focusablesRef.current[error[0]];
         if (field) field.focus();
@@ -128,7 +129,7 @@ const useMutation = <Input extends any>(
     }
   };
 
-  return [mutation, commit];
+  return [fields, commit, errors];
 };
 
 export default useMutation;

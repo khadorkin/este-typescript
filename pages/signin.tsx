@@ -9,6 +9,7 @@ import useIntl from '../hooks/useIntl';
 import useMutation from '../hooks/useMutation';
 import useTheme from '../hooks/useTheme';
 import validateSignIn from '../validators/validateSignIn';
+import { SignInInput, SignInErrors } from '../api/types';
 
 // import Router from 'next/router';
 // import { setCookie } from '../../browser/cookie';
@@ -32,18 +33,11 @@ const messages = defineMessages({
   },
 });
 
-// TODO: Use GraphQL endpoint generated type.
-export interface SignInInput {
-  createAccount: boolean;
-  email: string;
-  password: string;
-}
-
 const SignIn: React.FunctionComponent = () => {
   const intl = useIntl();
   const title = intl.formatMessage(pageMessages.pageTitleSignIn);
   const theme = useTheme();
-  const [mutation, commit] = useMutation<SignInInput>(
+  const [fields, commit, errors] = useMutation<SignInInput, SignInErrors>(
     {
       createAccount: false,
       email: '',
@@ -74,17 +68,14 @@ const SignIn: React.FunctionComponent = () => {
   //   }
 
   const signIn = (createAccount = false) => {
-    commit(input => ({
-      ...input,
-      createAccount,
-    }));
+    commit({ merge: { createAccount } });
   };
 
   return (
     <Page title={title}>
       <Text style={theme.heading1}>{title}</Text>
       <TextInput
-        {...mutation.email.textInput}
+        {...fields.email.textInput}
         placeholder={intl.formatMessage(messages.emailPlaceholder)}
         keyboardType="email-address"
         onSubmitEditing={() => signIn()}
@@ -93,9 +84,9 @@ const SignIn: React.FunctionComponent = () => {
           web: { autoComplete: 'email', name: 'email' },
         })}
       />
-      <ValidationError error={mutation.email.error} />
+      <ValidationError error={errors.email} />
       <TextInput
-        {...mutation.password.textInput}
+        {...fields.password.textInput}
         placeholder={intl.formatMessage(messages.passwordPlaceholder)}
         secureTextEntry
         onSubmitEditing={() => signIn()}
@@ -104,7 +95,7 @@ const SignIn: React.FunctionComponent = () => {
           web: { name: 'password' },
         })}
       />
-      <ValidationError error={mutation.password.error} />
+      <ValidationError error={errors.password} />
       <View style={theme.row}>
         <Spacer>
           <Button

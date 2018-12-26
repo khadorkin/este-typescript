@@ -2,6 +2,7 @@ import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { MutationResolvers } from '../generated/graphqlgen';
 import { User } from '../types';
+import validateSignIn from '../../validators/validateSignIn';
 
 // login: async (_parent, { email, password }, context) => {
 //   const user = await context.db.user({ email })
@@ -23,9 +24,15 @@ export const Mutation: MutationResolvers.Type = {
   ...MutationResolvers.defaultResolvers,
 
   signIn: async (_, { input }, context) => {
-    // TODO: Validate
-    // const errors = validateAuth(input);
-    // if (errors) return { errors };
+    const errors = validateSignIn(input);
+    if (errors)
+      return {
+        errors: {
+          email: null,
+          password: null,
+        },
+        token: null,
+      };
     const createSuccessAuthPayload = (user: User) => ({
       errors: null,
       token: jwt.sign({ userId: user.id }, process.env

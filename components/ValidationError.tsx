@@ -2,13 +2,13 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Text } from 'react-native';
 import useTheme from '../hooks/useTheme';
-import { MaybeValidationError } from '../validators';
+import { EmailError, PasswordError } from '../api/types';
+
+type ValidationError = EmailError | PasswordError;
 
 interface ValidationErrorProps {
-  error: MaybeValidationError;
+  error?: ValidationError | null;
 }
-
-// Validation errors are not collocated because they are reused.
 
 const ValidationError: React.FunctionComponent<ValidationErrorProps> = ({
   error,

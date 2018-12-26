@@ -1,16 +1,5 @@
 import isEmail from 'validator/lib/isEmail';
-import { EmailError, PasswordError } from '../api/types';
 // import isURL from 'validator/lib/isURL';
-
-type ValidationError = EmailError | PasswordError;
-
-export type MaybeValidationError = ValidationError | undefined;
-
-export type ValidationErrors<Input> = {
-  [P in keyof Input]?: MaybeValidationError
-};
-// TODO: Use generated Errors.
-export type Validator<Input> = (input: Input) => ValidationErrors<Input>;
 
 // Helpers.
 
@@ -22,13 +11,11 @@ const max1024 = (value: string) => value.length > 1024 && 'MAX_1024_CHARS';
 
 // Fields.
 
-type Validate = (value: string) => MaybeValidationError;
+export const validateEmail = (value: string) =>
+  required(value) || email(value) || null;
 
-export const validateEmail: Validate = value =>
-  required(value) || email(value) || undefined;
-
-export const validatePassword: Validate = value =>
-  required(value) || min5(value) || max1024(value) || undefined;
+export const validatePassword = (value: string) =>
+  required(value) || min5(value) || max1024(value) || null;
 
 // export const validateUrl = (value: string) =>
 //   required(value) || (!isURL(value) ? 'URL' : undefined);
