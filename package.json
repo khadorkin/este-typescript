@@ -25,8 +25,8 @@
     "deploy:db": "cd prisma && prisma deploy",
     "docker:up": "cd prisma && docker-compose up -d && cd ../",
     "docker:down": "cd prisma && docker-compose down && cd ../",
-    "codegen:api": "cd api && graphqlgen",
-    "codegen": "run-s codegen:api",
+    "gen:init": "gql-gen init",
+    "gen": "gql-gen --config codegen.yml",
     "env": "npm run ts-node scripts/env"
   },
   "dependencies": {
@@ -58,7 +58,10 @@
     "@types/validator": "^10.9.0",
     "@zeit/next-typescript": "^1.1.1",
     "dotenv": "^6.2.0",
-    "graphqlgen": "^0.4.0",
+    "graphql-code-generator": "^0.15.1",
+    "graphql-codegen-typescript-common": "^0.15.1",
+    "graphql-codegen-typescript-resolvers": "^0.15.1",
+    "graphql-codegen-typescript-server": "^0.15.1",
     "next-plugin-transpile-modules": "^1.0.0",
     "nodemon": "^1.18.7",
     "npm-run-all": "^4.1.5",

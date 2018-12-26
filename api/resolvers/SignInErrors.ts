@@ -1,5 +1,6 @@
-import { SignInErrorsResolvers } from '../generated/graphqlgen';
+import { SignInErrorsResolvers } from '../types';
 
-export const SignInErrors: SignInErrorsResolvers.Type = {
-  ...SignInErrorsResolvers.defaultResolvers,
+export const SignInErrors: SignInErrorsResolvers = {
+  email: parent => (parent.email == null ? null : parent.email),
+  password: parent => (parent.password == null ? null : parent.password),
 };

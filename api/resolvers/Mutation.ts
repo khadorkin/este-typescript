@@ -1,6 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
-import { MutationResolvers } from '../generated/graphqlgen';
+import { MutationResolvers } from '../types';
+// import { Context } from '../context';
 import { User } from '../types';
 
 // login: async (_parent, { email, password }, ctx) => {
@@ -19,10 +20,8 @@ import { User } from '../types';
 //   }
 // },
 
-export const Mutation: MutationResolvers.Type = {
-  ...MutationResolvers.defaultResolvers,
-
-  signIn: async (_, { input }, ctx) => {
+export const Mutation: MutationResolvers = {
+  signIn: async (_, { input }, context) => {
     // TODO: Validate
     // const errors = validateAuth(input);
     // if (errors) return { errors };
@@ -42,7 +41,7 @@ export const Mutation: MutationResolvers.Type = {
       //     },
       //   };
       const password = await bcrypt.hash(input.password, 10);
-      const user = await ctx.db.createUser({ email, password });
+      const user = await context.db.createUser({ email, password });
       return createSuccessAuthPayload(user);
     }
     throw new Error('Resolver not implemented');

@@ -1,7 +1,6 @@
-import { QueryResolvers } from '../generated/graphqlgen';
+import { QueryResolvers } from '../types';
 
-export const Query: QueryResolvers.Type = {
-  ...QueryResolvers.defaultResolvers,
+export const Query: QueryResolvers = {
   me: () => {
     throw new Error('Resolver not implemented');
   },

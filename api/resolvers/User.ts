@@ -1,9 +1,8 @@
-import { UserResolvers } from '../generated/graphqlgen';
-import { User as UserType } from '../types';
+import { UserResolvers } from '../types';
 
-export const User: UserResolvers.Type = {
-  ...UserResolvers.defaultResolvers,
-
-  createdAt: (parent: UserType) => parent.createdAt,
-  updatedAt: (parent: UserType) => parent.createdAt,
+export const User: UserResolvers = {
+  createdAt: parent => parent.createdAt,
+  email: parent => parent.email,
+  id: parent => parent.id,
+  updatedAt: parent => parent.createdAt,
 };
