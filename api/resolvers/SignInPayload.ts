@@ -1,6 +1,5 @@
-import { SignInPayloadResolvers } from '../types';
+import { SignInPayloadResolvers } from '../generated/graphqlgen';
 
-export const SignInPayload: SignInPayloadResolvers = {
-  errors: parent => (parent.errors == null ? null : parent.errors),
-  token: parent => (parent.token == null ? null : parent.token),
+export const SignInPayload: SignInPayloadResolvers.Type = {
+  ...SignInPayloadResolvers.defaultResolvers,
 };

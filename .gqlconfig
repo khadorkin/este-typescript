@@ -1,4 +1,4 @@
-/* for kumarharsh/graphql-for-vscode */
+/* .gqlconfig */
 {
   schema: {
     files: 'api/**/*.graphql'
