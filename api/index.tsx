@@ -1,6 +1,7 @@
 import { GraphQLServer } from 'graphql-yoga';
 import { Prisma } from '../prisma/generated/prisma-client';
 import { resolvers } from './resolvers';
+import { Context } from './types';
 
 const endpoint = process.env.PRISMA_ENDPOINT as string;
 if (!endpoint)
@@ -8,12 +9,13 @@ if (!endpoint)
     `Missing process.env.PRISMA_ENDPOINT. Did you run 'npm run env dev'?`,
   );
 
-const secret = process.env.PRISMA_SECRET;
-
-const db = new Prisma({ endpoint, secret });
+const context: Context = {
+  db: new Prisma({ endpoint, secret: process.env.PRISMA_SECRET }),
+  hasError: errors => Object.values(errors).some(error => error != null),
+};
 
 const server = new GraphQLServer({
-  context: { db },
+  context,
   resolvers,
   typeDefs: './api/schema.graphql',
 } as any);
