@@ -49,8 +49,8 @@ type Commit<Input> = (
 // Read it like a story. First, we need fields, then we can commit, etc.
 type Return<Input, Errors> = [Fields<Input>, Commit<Input>, Partial<Errors>];
 
-// 'extends any' because of https://github.com/Microsoft/TypeScript/issues/4922
-const useMutation = <Input extends any, Errors extends any>(
+// Why any? Is it ideal?
+const useMutation = <Input extends { [key: string]: any }, Errors>(
   initialState: Input,
   useMutationOptions?: {
     validator?: (input: Input) => Errors;
@@ -119,6 +119,7 @@ const useMutation = <Input extends any, Errors extends any>(
 
     if (useMutationOptions && useMutationOptions.validator) {
       const errors = useMutationOptions.validator(input);
+      // TODO: To function, because we will reuse it.
       const error = Object.entries(errors).find(([_, value]) => value != null);
       // as Errors is workaround, TypeScript should infer it.
       setErrors(error ? ({ [error[0]]: error[1] } as Errors) : {});

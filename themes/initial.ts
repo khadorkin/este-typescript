@@ -118,7 +118,7 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
   const page: ViewStyle = {
     backgroundColor: colors.background,
     // minHeight ensures the footer is always at the bottom. Flex 1 can't help,
-    // because we do not use ScrollView. Check _document.tsx overflow comment.
+    // because we do not use ScrollView. Check _document.ts overflow comment.
     minHeight: '100%',
   };
 
