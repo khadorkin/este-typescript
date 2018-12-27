@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { MutationResolvers } from '../generated/graphqlgen';
-import { User } from '../types';
+import { User, SignInErrors } from '../types';
 import validateSignIn from '../../validators/validateSignIn';
 
 // login: async (_parent, { email, password }, context) => {
@@ -25,32 +25,22 @@ export const Mutation: MutationResolvers.Type = {
 
   signIn: async (_, { input }, context) => {
     const errors = validateSignIn(input);
-    if (errors)
-      return {
-        errors: {
-          email: null,
-          password: null,
-        },
-        token: null,
-      };
-    const createSuccessAuthPayload = (user: User) => ({
+    const fail = (errors: SignInErrors) => ({ errors, token: null });
+    // if (context.hasErrors(errors)) return fail(errors);
+    if (Object.values(errors).some(value => value != null)) return fail(errors);
+
+    const success = (userId: string) => ({
       errors: null,
-      token: jwt.sign({ userId: user.id }, process.env
-        .API_SECRET as jwt.Secret),
+      token: jwt.sign({ userId }, process.env.API_SECRET as jwt.Secret),
     });
 
     if (input.createAccount) {
-      const email = input.email;
-      // const exists = await db.exists.User({ email: input.email });
-      // if (exists)
-      //   return {
-      //     errors: {
-      //       email: 'ALREADY_EXISTS',
-      //     },
-      //   };
+      const { email } = input;
+      const exists = await context.db.$exists.user({ email });
+      if (exists) return fail({ email: 'ALREADY_EXISTS', password: null });
       const password = await bcrypt.hash(input.password, 10);
       const user = await context.db.createUser({ email, password });
-      return createSuccessAuthPayload(user);
+      return success(user.id);
     }
     throw new Error('Resolver not implemented');
   },
