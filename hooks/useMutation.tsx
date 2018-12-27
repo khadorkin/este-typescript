@@ -95,7 +95,7 @@ const useMutation = <Input extends any, Errors extends any>(
         selectedValue: state[key],
       });
 
-      // TODO: How to type field and return values properly?
+      // TODO: How to type field and return value properly?
       return Object.keys(state).reduce((fields, key) => {
         const value = state[key];
         const field =
