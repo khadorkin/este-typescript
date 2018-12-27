@@ -23,5 +23,6 @@
         "name": "@divyenduz/ts-graphql-plugin"
       }
     ]
-  }
+  },
+  "exclude": ["node_modules", "**/generated/**/*.*"]
 }

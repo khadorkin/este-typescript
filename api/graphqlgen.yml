@@ -9,5 +9,5 @@ models:
 output: ./generated/graphqlgen.ts
 
 resolver-scaffolding:
-  output: ./generated/tmp-resolvers/
+  output: ./generated/resolvers/
   layout: file-per-type
