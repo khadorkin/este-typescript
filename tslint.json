@@ -11,11 +11,15 @@
     "curly": false,
     "no-shadowed-variable": false,
     "ordered-imports": false,
-    // To prevent thinking about which syntax is better. Arrow is better
-    // because "const Index: React.FunctionComponent = wholeFnIsChecked".
-    // Note "extends {}" workaround for JSX.
-    // const identity = <T extends {}>(arg: T): T => { return arg; }
+    // Never ever think about it. Arrow is better because const fn: Fb = ...
     "only-arrow-functions": true,
-    "interface-name": [true, "never-prefix"]
+    "interface-name": [true, "never-prefix"],
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-pascal-case",
+      "allow-leading-underscore"
+    ]
   }
 }
