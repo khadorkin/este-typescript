@@ -34,4 +34,5 @@ export interface SignInPayload {
 export interface Context {
   db: Prisma;
   hasError: (errors: {}) => boolean;
+  userId: string | null;
 }
