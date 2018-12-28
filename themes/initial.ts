@@ -51,7 +51,6 @@ export const ModularScale = {
   step16: 4,
 };
 
-// http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
 const createTypography = ({
   fontSize,
   lineHeight,
@@ -61,7 +60,8 @@ const createTypography = ({
   lineHeight: number;
   scale: keyof typeof ModularScale;
 }) => {
-  const computeModularLineHeight = (modularFontSize: number) => {
+  // http://inlehmansterms.net/2014/06/09/groove-to-a-vertical-rhythm
+  const computeRhythmLineHeight = (modularFontSize: number) => {
     const lines = Math.ceil(modularFontSize / lineHeight);
     return lines * lineHeight;
   };
@@ -70,10 +70,10 @@ const createTypography = ({
     lineHeight,
     scale: (level: number) => {
       const modularFontSize = fontSize * ModularScale[scale] ** level;
-      const modularLineHeight = computeModularLineHeight(modularFontSize);
+      const rhythmLineHeight = computeRhythmLineHeight(modularFontSize);
       return {
         fontSize: modularFontSize,
-        lineHeight: modularLineHeight,
+        lineHeight: rhythmLineHeight,
       };
     },
   };
