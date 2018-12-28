@@ -6,6 +6,9 @@ import Link from '../components/Link';
 import Spacer from '../components/Spacer';
 import useIntl from '../hooks/useIntl';
 import useTheme from '../hooks/useTheme';
+import ThemeContext from '../contexts/ThemeContext';
+import darkTheme from '../themes/dark';
+import initialTheme from '../themes/initial';
 
 export const pageMessages = defineMessages({
   pageFooterMadeBy: {
@@ -59,9 +62,10 @@ const Footer: React.FunctionComponent = () => {
 const Page: React.FunctionComponent<{
   title: string;
 }> = props => {
-  const theme = useTheme();
+  const isInitialTheme = false;
+  const theme = isInitialTheme ? initialTheme : darkTheme;
   return (
-    <>
+    <ThemeContext.Provider value={theme}>
       <Head>
         <title>{props.title}</title>
       </Head>
@@ -72,7 +76,7 @@ const Page: React.FunctionComponent<{
           <Footer />
         </View>
       </View>
-    </>
+    </ThemeContext.Provider>
   );
 };
 
