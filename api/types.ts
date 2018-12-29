@@ -34,5 +34,5 @@ export interface SignInPayload {
 export interface Context {
   db: Prisma;
   hasError: (errors: {}) => boolean;
-  getUser: () => Promise<User | null>;
+  user: User | null;
 }
