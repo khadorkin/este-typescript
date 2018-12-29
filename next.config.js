@@ -2,6 +2,9 @@ const withTM = require('next-plugin-transpile-modules');
 const withTypescript = require('@zeit/next-typescript');
 require('dotenv').config();
 
+const { API_ENDPOINT } = process.env;
+if (!API_ENDPOINT) throw Error(`Did you run 'npm run env dev'?`);
+
 module.exports = {
   ...withTypescript(
     withTM({
@@ -16,9 +19,6 @@ module.exports = {
     }),
   ),
   publicRuntimeConfig: {
-    // staticFolder: process.env.PUBLIC_CONFIG_VALUE,
-  },
-  serverRuntimeConfig: {
-    // mySecret: process.env.SECRET_CONFIG_VALUE,
+    apiEndpoint: API_ENDPOINT,
   },
 };
