@@ -7,7 +7,7 @@
 //  1) Start with semantic names. Like foreground and background colors.
 //  2) Then add foreground-whatever (e.g. foreground-dark).
 // That's all.
-import { TextStyle, ViewStyle } from 'react-native';
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 
 // https://yeun.github.io/open-color/
 export const colors = {
@@ -254,8 +254,7 @@ export const createTheme = (colors: Colors, dimensions: Dimensions) => {
   };
 };
 
-const theme = createTheme(colors, dimensions);
-
+const theme = StyleSheet.create(createTheme(colors, dimensions));
 export type Theme = typeof theme;
 
 export default theme;

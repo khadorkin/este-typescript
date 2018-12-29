@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native';
 import { colors, createTheme, dimensions } from './initial';
 
 const darkColors = {
@@ -6,6 +7,6 @@ const darkColors = {
   foreground: '#ffffff',
 };
 
-const theme = createTheme(darkColors, dimensions);
+const theme = StyleSheet.create(createTheme(darkColors, dimensions));
 
 export default theme;
