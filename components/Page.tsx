@@ -62,6 +62,7 @@ interface PageProps {
 
 const Page: React.FunctionComponent<PageProps> = props => {
   const theme = useTheme();
+
   return (
     <>
       <Head>

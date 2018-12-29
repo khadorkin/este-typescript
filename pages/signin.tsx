@@ -10,6 +10,21 @@ import useMutation from '../hooks/useMutation';
 import useTheme from '../hooks/useTheme';
 import validateSignIn from '../validators/validateSignIn';
 import { SignInInput, SignInErrors } from '../api/types';
+// import useRelayEnvironment from '../hooks/useRelayEnvironment';
+// import { graphql, commitMutation } from 'react-relay';
+// import { signinMutation } from '../generated/signinMutation.graphql';
+
+// const mutation = graphql`
+//   mutation signinMutation($input: SignInInput!) {
+//     signIn(input: $input) {
+//       token
+//       errors {
+//         email
+//         password
+//       }
+//     }
+//   }
+// `;
 
 // import Router from 'next/router';
 // import { setCookie } from '../../browser/cookie';
@@ -34,9 +49,10 @@ const messages = defineMessages({
 });
 
 const SignIn: React.FunctionComponent = () => {
+  const theme = useTheme();
   const intl = useIntl();
   const title = intl.formatMessage(pageMessages.pageTitleSignIn);
-  const theme = useTheme();
+  // const environment = useRelayEnvironment();
   const [fields, commit, errors] = useMutation<SignInInput, SignInErrors>(
     {
       createAccount: false,
@@ -69,6 +85,27 @@ const SignIn: React.FunctionComponent = () => {
 
   const signIn = (createAccount = false) => {
     commit({ merge: { createAccount } });
+    // const variables = {
+    //   input: {
+    //     createAccount,
+    //     email: fields.email.textInput.value,
+    //     password: fields.password.textInput.value,
+    //   },
+    // };
+    // Predat typ {variables, response}
+    // commitMutation<signinMutation>(environment, {
+    //   mutation,
+    //   variables,
+    //   onCompleted(response, errors) {
+    //     // console.log(response);
+    //     // console.log(errors);
+    //   },
+    //   onError(error) {
+    //     // console.log(error);
+    //   },
+    //   // onCompleted?(response: T["response"], errors: PayloadError[] | null | undefined): void;
+    //   // onError?(error?: Error): void;
+    // });
   };
 
   return (

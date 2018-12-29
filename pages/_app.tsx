@@ -40,7 +40,8 @@ export default class MyApp extends App<{
 }> {
   static async getInitialProps({ Component, ctx }: NextAppContext) {
     let pageProps = {};
-    // ctx.req
+
+    // TODO: Fetch viewer and store it in context. Add useViewer.
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
@@ -55,6 +56,7 @@ export default class MyApp extends App<{
   render() {
     const { Component, pageProps, initialNow } = this.props;
 
+    // TODO: Read from viewer or set initial.
     const isInitialTheme = false;
     const theme = isInitialTheme ? initialTheme : darkTheme;
 
@@ -63,6 +65,8 @@ export default class MyApp extends App<{
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjanE4dXVkeG8wMGJ4MDc3ODI3NXRpbmh6IiwiaWF0IjoxNTQ2MDUwOTk0fQ.zvMweHWCVNItWDjSkYzvmX2SBfahVZWKmV-3QlycWPo',
     );
 
+    // Context providers must be used here in _app, otherwise useContext Hooks
+    // in pages/*.tsx would return null or default values. MyApp is a wrapper.
     return (
       <Container>
         <IntlProvider
