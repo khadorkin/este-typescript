@@ -50,5 +50,6 @@ type Mutation {
 }
 
 type Query {
-  me: User
+  # https://medium.com/workflowgen/graphql-schema-design-the-viewer-field-aeabfacffe72
+  viewer: User
 }

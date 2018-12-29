@@ -14,7 +14,7 @@ type PasswordError =
 export namespace QueryResolvers {
   export const defaultResolvers = {};
 
-  export type MeResolver = (
+  export type ViewerResolver = (
     parent: undefined,
     args: {},
     ctx: Context,
@@ -22,7 +22,7 @@ export namespace QueryResolvers {
   ) => User | null | Promise<User | null>;
 
   export interface Type {
-    me: (
+    viewer: (
       parent: undefined,
       args: {},
       ctx: Context,
