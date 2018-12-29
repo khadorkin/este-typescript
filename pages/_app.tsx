@@ -15,7 +15,7 @@ import {
 } from 'relay-runtime';
 import ThemeContext from '../contexts/ThemeContext';
 import darkTheme from '../themes/dark';
-import initialTheme from '../themes/initial';
+import lightTheme from '../themes/light';
 
 const createRelayEnvironment = (token: string | null, records = {}) => {
   const fetchQuery: FetchFunction = async (operation, variables) => {
@@ -56,9 +56,9 @@ export default class MyApp extends App<{
   render() {
     const { Component, pageProps, initialNow } = this.props;
 
-    // TODO: Read from viewer or set initial.
-    const isInitialTheme = false;
-    const theme = isInitialTheme ? initialTheme : darkTheme;
+    // TODO: Read from viewer.
+    const userLightTheme = false;
+    const theme = userLightTheme ? lightTheme : darkTheme;
 
     // const environment = createRelayEnvironment({ token, records });
     const environment = createRelayEnvironment(

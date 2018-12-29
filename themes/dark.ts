@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, createTheme, dimensions } from './initial';
+import { colors, createTheme, dimensions } from './light';
 
 const darkColors = {
   ...colors,
