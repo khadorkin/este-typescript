@@ -3,7 +3,9 @@ const withTypescript = require('@zeit/next-typescript');
 require('dotenv').config();
 
 const { API_ENDPOINT } = process.env;
-if (!API_ENDPOINT) throw Error(`Did you run 'npm run env dev'?`);
+if (!API_ENDPOINT) {
+  throw Error(`Did you run 'npm run env dev'?`);
+}
 
 module.exports = {
   ...withTypescript(
