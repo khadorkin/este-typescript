@@ -12,6 +12,7 @@ import {
   Store,
   FetchFunction,
 } from 'relay-runtime';
+import { graphql, QueryRenderer } from 'react-relay';
 
 const createRelayEnvironment = (token: string | null, records = {}) => {
   const fetchQuery: FetchFunction = async (operation, variables) => {
@@ -50,6 +51,10 @@ export default class MyApp extends App<{
   render() {
     const { Component, pageProps, initialNow } = this.props;
 
+    const environment = createRelayEnvironment(
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjanE4dXVkeG8wMGJ4MDc3ODI3NXRpbmh6IiwiaWF0IjoxNTQ2MDUwOTk0fQ.zvMweHWCVNItWDjSkYzvmX2SBfahVZWKmV-3QlycWPo',
+    );
+
     return (
       <Container>
         <IntlProvider
@@ -59,6 +64,27 @@ export default class MyApp extends App<{
         >
           <IntlProviderFix>
             <Component {...pageProps} />
+            <QueryRenderer
+              environment={environment}
+              query={graphql`
+                query AppQuery {
+                  me {
+                    id
+                    # email
+                  }
+                }
+              `}
+              variables={{}}
+              render={({ error, props }) => {
+                if (error) {
+                  return <div>Error!</div>;
+                }
+                if (!props) {
+                  return <div>Loading...</div>;
+                }
+                return <div>User ID: {JSON.stringify(props)}</div>;
+              }}
+            />
           </IntlProviderFix>
         </IntlProvider>
       </Container>
