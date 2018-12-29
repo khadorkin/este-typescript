@@ -6,33 +6,32 @@ import { Context } from './types';
 import { IncomingMessage } from 'http';
 import * as jwt from 'jsonwebtoken';
 import { JsonWebTokenPayload } from './resolvers/Mutation';
-// import { makeExecutableSchema } from "graphql-tools";
-// import { rule, shield, and, or, not } from 'graphql-shield';
 
 const { PRISMA_ENDPOINT, PRISMA_SECRET, API_SECRET } = process.env;
 if (!PRISMA_ENDPOINT || !PRISMA_SECRET || !API_SECRET)
   throw Error(`Did you run 'npm run env dev'?`);
 
-const db = new Prisma({ endpoint: PRISMA_ENDPOINT, secret: PRISMA_SECRET });
-
-const hasError = (errors: {}) =>
-  Object.values(errors).some(error => error != null);
-
-const tryGetUserId = (req: IncomingMessage): string | null => {
-  const { authorization } = req.headers;
-  if (authorization == null) return null;
-  const token = authorization.replace('Bearer ', '');
-  const decoded = jwt.verify(token, API_SECRET);
-  const hasUserId = (decoded: any): decoded is JsonWebTokenPayload =>
-    'userId' in decoded;
-  return hasUserId(decoded) ? decoded.userId : null;
-};
-
 const createContext = ({ req }: { req: IncomingMessage }): Context => {
+  const db = new Prisma({ endpoint: PRISMA_ENDPOINT, secret: PRISMA_SECRET });
+
+  // https://graphql.org/learn/authorization
+  // Returning null instead of throwing auth errors in resolvers is
+  // recommended. We can add more sophisticated auth errors logic later.
+  const getUser = (req: IncomingMessage) => async () => {
+    const { authorization } = req.headers;
+    if (authorization == null) return null;
+    const token = authorization.replace('Bearer ', '');
+    const decoded = jwt.verify(token, API_SECRET);
+    const hasUserId = (decoded: any): decoded is JsonWebTokenPayload =>
+      'userId' in decoded;
+    if (!hasUserId(decoded)) return null;
+    return db.user({ id: decoded.userId });
+  };
+
   return {
     db,
-    hasError,
-    userId: tryGetUserId(req),
+    getUser: getUser(req),
+    hasError: (errors: {}) => Object.values(errors).some(e => e != null),
   };
 };
 
